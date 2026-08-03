@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: var(--main-color-background);
+  color: var(--main-color-foreground);
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
