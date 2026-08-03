@@ -1,4 +1,5 @@
 import styles from './Header.module.css';
+import { Link } from 'react-router';
 
 function Header() {
   return (
@@ -6,8 +7,16 @@ function Header() {
       <div className={styles.logo}>Messaging</div>
       <nav className={styles.nav}>
         <ul className={styles.list}>
-          <li className={styles.item}>New Chat</li>
-          <li className={styles.item}>Profile</li>
+          <li className={styles.item}>
+            <Link className={styles.link} to='/users'>
+              New Chat
+            </Link>
+          </li>
+          <li className={styles.item}>
+            <Link className={styles.link} to='/profile'>
+              Profile
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

@@ -11,3 +11,9 @@
   display: flex;
   gap: 20px;
 }
+
+.link:link,
+.link:visited {
+  color: var(--main-color-foreground);
+  text-decoration: none;
+}
