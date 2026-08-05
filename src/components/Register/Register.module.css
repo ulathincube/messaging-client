@@ -1,0 +1,36 @@
+.backdrop {
+  background-color: var(--backdrop-color);
+}
+
+.register {
+  text-align: center;
+  background-color: var(--supporting-color);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: var(--font-weight-normal);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* fix maybe */
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.field,
+.submit {
+  border-radius: 0;
+  border: 1px solid var(--black);
+  padding: 5px;
+}

@@ -1,0 +1,14 @@
+.main {
+  flex: 1;
+  display: flex;
+}
+
+.sidebar {
+  background-color: var(--supporting-color);
+  flex: 2;
+}
+
+.focus {
+  background-color: var(--supporting-color-darker);
+  flex: 7;
+}
