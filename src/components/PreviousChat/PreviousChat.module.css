@@ -1,0 +1,22 @@
+.wrapper {
+  background-color: var(--gray);
+  padding: 10px;
+}
+
+.user {
+  font-size: 1.1rem;
+  color: var(--main-color-foreground);
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: inherit;
+  color: var(--main-color-foreground);
+}
+
+.chat {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}

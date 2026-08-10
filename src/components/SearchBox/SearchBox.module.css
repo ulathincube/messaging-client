@@ -1,0 +1,85 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.field {
+  border: 1px solid var(--black);
+}
+
+.title {
+  font-size: 1.3rem;
+}
+
+.result {
+  background-color: var(--main-color-background);
+  color: var(--main-color-foreground);
+  padding: 10px;
+  display: flex;
+}
+
+.select {
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  flex: 1;
+}
+
+.search {
+  padding: 10px;
+  flex: 1;
+  border: 2px solid var(--main-color-background);
+}
+
+.search:focus {
+  outline: 2px solid var(--supporting-color-darker);
+
+  background-color: var(--black);
+  color: var(--main-color-foreground);
+}
+
+.search::placeholder {
+  color: var(--black);
+}
+
+.error {
+  background-color: var(--black);
+  color: var(--main-color-foreground);
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.button,
+.cancel {
+  padding: 10px 20px;
+  border: none;
+  flex: 1;
+  font-size: 1.1rem;
+}
+
+.button {
+  background-color: var(--main-color-background);
+  color: var(--main-color-foreground);
+}
+
+.cancel {
+  background-color: var(--supporting-color-darker);
+  color: var(--main-color-background);
+}

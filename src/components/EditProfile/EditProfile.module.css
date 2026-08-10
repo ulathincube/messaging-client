@@ -1,0 +1,37 @@
+.wrapper {
+  padding: 10px;
+  background-color: var(--supporting-color);
+  flex: 1;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  gap: 10px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.caption {
+  font-size: 1.8rem;
+}
+
+.label {
+  font-size: 1.2rem;
+}
+
+.field,
+.submit {
+  padding: 5px;
+}
+
+.submit {
+  padding: 5px 10px;
+  border: none;
+  background-color: var(--main-color-background);
+  color: var(--main-color-foreground);
+}

@@ -1,16 +1,36 @@
 async function createUser(email, password) {
   try {
-    const user = await fetch(`${import.meta.env.VITE_API_URL}/users/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/users/register`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
       },
-      body: JSON.stringify({ email, password }),
-    });
-    return user;
+    );
+    return response;
   } catch (error) {
     if (error) throw error;
   }
 }
 
-export { createUser };
+async function findUser(email) {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/users/search?query=${email}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    return response;
+  } catch (error) {
+    if (error) throw error;
+  }
+}
+
+export { createUser, findUser };

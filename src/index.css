@@ -1,12 +1,15 @@
 :root {
   /* colors go here */
   --font-weight-normal: 500;
+  --font-weight-bold: 800;
   --main-color-background: hsl(220deg 85% 45%);
   --main-color-foreground: hsl(220deg 30% 95%);
   --supporting-color: hsl(220deg 70% 90%);
+  --white: hsl(220deg 20% 95%);
   --supporting-color-darker: hsl(220deg 100% 85%);
   --black: hsl(220deg 70% 10%);
-  --backdrop-color: hsl(220deg 90% 10% / 0.3);
+  --gray: hsl(220deg 30% 30%);
+  --backdrop-color: hsl(220deg 90% 90% / 0.9);
 }
 
 /* 1. Use a more-intuitive box-sizing model */
@@ -33,6 +36,8 @@ body {
   line-height: 1.5;
   /* 5. Improve text rendering */
   -webkit-font-smoothing: antialiased;
+  background-color: var(--white);
+  color: var(--black);
 }
 
 /* 6. Improve media defaults */
@@ -99,5 +104,12 @@ body {
 #root {
   min-height: 100%;
   display: flex;
+  flex-direction: column;
+}
+
+#auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }

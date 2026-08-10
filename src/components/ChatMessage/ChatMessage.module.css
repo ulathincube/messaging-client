@@ -1,0 +1,21 @@
+.chat {
+  padding: 5px 10px;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  background-color: var(--supporting-color);
+  max-width: fit-content;
+}
+
+.right {
+  align-self: flex-end;
+}
+
+.left {
+  align-self: flex-start;
+}
+
+.time {
+  font-size: 0.8rem;
+  align-self: flex-end;
+}

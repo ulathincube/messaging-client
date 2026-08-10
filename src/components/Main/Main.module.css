@@ -6,9 +6,26 @@
 .sidebar {
   background-color: var(--supporting-color);
   flex: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
 }
 
 .focus {
   background-color: var(--supporting-color-darker);
   flex: 7;
+}
+
+.new {
+  margin-top: auto;
+}
+
+.chat {
+  background-color: var(--main-color-background);
+  color: var(--main-color-foreground);
+  border: none;
+  margin-top: auto;
+  padding: 10px 20px;
+  width: 100%;
+  font-size: 1.1rem;
 }

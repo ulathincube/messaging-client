@@ -1,0 +1,50 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding-bottom: 10px;
+}
+
+.chats {
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.contact {
+  background-color: var(--black);
+  color: var(--main-color-foreground);
+  padding: 20px;
+}
+
+.chat {
+  display: flex;
+  margin-top: auto;
+  align-items: stretch;
+}
+
+.group {
+  flex: 1;
+  display: flex;
+}
+
+.group:nth-child(1) {
+  flex: 3;
+}
+
+.message,
+.submit {
+  padding: 10px 5px;
+  border: none;
+}
+
+.submit {
+  background-color: var(--main-color-background);
+  color: var(--main-color-foreground);
+}
+
+.message {
+  width: 100%;
+  resize: none;
+}

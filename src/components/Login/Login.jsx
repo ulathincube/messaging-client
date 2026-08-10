@@ -1,14 +1,14 @@
-import styles from './Register.module.css';
+import styles from './Login.module.css';
 import { createPortal } from 'react-dom';
 import { useState } from 'react';
 import { createUser } from '../../services/user';
 import { Link } from 'react-router';
 
-function Register({ onToggle }) {
+function Login({ onToggle }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  async function registerUserHandler(event) {
+  async function loginUserHandler(event) {
     event.preventDefault();
     if (!email || !password) return;
     try {
@@ -16,6 +16,7 @@ function Register({ onToggle }) {
 
       if (!response.ok) throw new Error('An error occurred');
       const data = await response.json();
+      console.log(data);
     } catch (error) {
       // toast?
       console.log(error);
@@ -32,11 +33,11 @@ function Register({ onToggle }) {
 
   return createPortal(
     <div className={styles.backdrop}>
-      <section className={styles.register}>
+      <section className={styles.login}>
         <article>
-          <h2 className={styles.title}>Register</h2>
+          <h2 className={styles.title}>Login</h2>
         </article>
-        <form className={styles.form} onSubmit={registerUserHandler}>
+        <form className={styles.form} onSubmit={loginUserHandler}>
           <div className={styles.group}>
             <label className={styles.label} htmlFor='email'>
               Email Address
@@ -65,12 +66,12 @@ function Register({ onToggle }) {
             />
           </div>
           <div className={styles.group}>
-            <button className={styles.submit}>Register</button>
+            <button className={styles.submit}>Login</button>
           </div>
         </form>
         <div className={styles.aside}>
           <button onClick={onToggle} className={styles.action}>
-            Already have an account? Login here
+            Don't have an account? Register here
           </button>
         </div>
       </section>
@@ -79,4 +80,4 @@ function Register({ onToggle }) {
   );
 }
 
-export default Register;
+export default Login;
