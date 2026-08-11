@@ -1,8 +1,10 @@
 import styles from './ChatMessage.module.css';
+import { formatTime } from '../../lib/dayjs';
 
 function ChatMessage({ chatMessage }) {
   //sender left, receiver right
-  const chatTime = `${new Date(chatMessage.sent_time).getHours()}:${new Date(chatMessage.sent_time).getMinutes()}`;
+  // const chatTime = `${new Date(chatMessage.sent_time).getHours()}:${new Date(chatMessage.sent_time).getMinutes()}`;
+  const chatTime = formatTime(chatMessage.sent_time);
   const senderId = 1;
 
   const bubbleStyles =

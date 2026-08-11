@@ -46,13 +46,10 @@
 
 .search:focus {
   outline: 2px solid var(--supporting-color-darker);
-
-  background-color: var(--black);
-  color: var(--main-color-foreground);
 }
 
 .search::placeholder {
-  color: var(--black);
+  color: var(--gray);
 }
 
 .error {

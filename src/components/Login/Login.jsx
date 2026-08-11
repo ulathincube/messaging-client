@@ -1,22 +1,26 @@
 import styles from './Login.module.css';
 import { createPortal } from 'react-dom';
 import { useState } from 'react';
-import { createUser } from '../../services/user';
-import { Link } from 'react-router';
+import { loginUser } from '../../services/user';
+import useAuth from '../../hooks/useAuth';
+import { useNavigate } from 'react-router';
 
 function Login({ onToggle }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [user, onChangeUser] = useAuth();
+  const navigate = useNavigate();
 
   async function loginUserHandler(event) {
     event.preventDefault();
     if (!email || !password) return;
     try {
-      const response = await createUser(email, password);
+      const response = await loginUser(email, password);
 
       if (!response.ok) throw new Error('An error occurred');
       const data = await response.json();
-      console.log(data);
+      onChangeUser(data);
+      navigate('/');
     } catch (error) {
       // toast?
       console.log(error);

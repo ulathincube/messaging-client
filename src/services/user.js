@@ -33,4 +33,23 @@ async function findUser(email) {
   }
 }
 
-export { createUser, findUser };
+async function loginUser(email, password) {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/users/login`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      },
+    );
+
+    return response;
+  } catch (error) {
+    if (error) throw error;
+  }
+}
+
+export { createUser, findUser, loginUser };
