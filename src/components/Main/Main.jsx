@@ -18,35 +18,6 @@ function Main() {
 
   useEffect(() => {
     if (!user) return;
-    async function getChats() {
-      // let emails = [];
-      // try {
-      //   // use prisma.message
-      //   const response = await findUser(user.email);
-      //   const { data, error, message } = await response.json();
-      //   const allMessages = data.sentMessages
-      //     .concat(data.receivedMessages)
-      //     .sort(
-      //       (currentMessage, nextMessage) =>
-      //         new Date(currentMessage.sent_time) -
-      //         new Date(nextMessage.sent_time),
-      //     );
-      //   if (allMessages.length === 0) return;
-      //   const lastMessage_ = allMessages[allMessages.length - 1];
-      //   setLastMessage(lastMessage_);
-      //   // data.receivedMessages.sender, data.sentMessages.receiver
-      //   for (let i = 0; i < data.receivedMessages.length; i++) {
-      //     emails.push(data.receivedMessages[i].sender.email);
-      //   }
-      //   for (let j = 0; j < data.sentMessages.length; j++) {
-      //     emails.push(data.sentMessages[j].receiver.email);
-      //   }
-      //   emails = [...new Set(emails)];
-      //   setChats(emails);
-      // } catch (error) {
-      //   console.log(error);
-      // }
-    }
 
     async function runEffect() {
       const { email } = user;
@@ -61,8 +32,6 @@ function Main() {
     }
 
     runEffect();
-
-    // getChats();
   }, [user]);
 
   if (!user) return;
@@ -70,6 +39,8 @@ function Main() {
   function onToggleCreateChat() {
     setCreateChat(!createChat);
   }
+
+  console.log({ contacts });
 
   return (
     <main className={styles.main}>
@@ -94,7 +65,49 @@ function Main() {
           </div>
         )}
       </aside>
-      <section className={styles.focus}>{contact && <ChatBox />}</section>
+      <section className={styles.focus}>
+        <div className={styles.wrapper}>
+          {!contact && (
+            <form className={styles.search}>
+              <div className={styles.group}>
+                <input
+                  type='search'
+                  name='search'
+                  id='search'
+                  className={styles.field}
+                />
+              </div>
+              <div className={styles.group}>
+                <button className={styles.submit}>Search</button>
+              </div>
+            </form>
+          )}
+          <section className={styles.display}>
+            {!contact &&
+              contacts.length > 0 &&
+              contacts.map(contactObject => (
+                <PreviousChat
+                  key={contactObject.email}
+                  email={contactObject.email}
+                  lastMessage={'Hello World'}
+                />
+              ))}
+          </section>
+          {contact && <ChatBox />}
+        </div>
+        <article className={styles.bottom}>
+          <>
+            {!createChat && (
+              <button className={styles.chat} onClick={onToggleCreateChat}>
+                New Chat
+              </button>
+            )}
+            {!contact && createChat && (
+              <SearchBox onCreateChat={onToggleCreateChat} />
+            )}
+          </>
+        </article>
+      </section>
     </main>
   );
 }

@@ -99,6 +99,7 @@ body {
   font-family: 'Reddit Sans', sans-serif;
   font-weight: var(--font-weight-normal);
   color: var(--black);
+  font-size: 1.1rem;
 }
 
 #root {

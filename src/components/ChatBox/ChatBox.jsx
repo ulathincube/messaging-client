@@ -77,7 +77,7 @@ function ChatBox() {
         </div>
         <div className={styles.group}>
           <button onClick={onSendMessage} className={styles.submit}>
-            Send Message
+            Send
           </button>
         </div>
       </form>

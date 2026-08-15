@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  padding-bottom: 10px;
 }
 
 .chats {
@@ -35,7 +34,7 @@
 
 .message,
 .submit {
-  padding: 10px 5px;
+  padding: 10px;
   border: none;
 }
 
@@ -47,4 +46,17 @@
 .message {
   width: 100%;
   resize: none;
+}
+
+@media screen and (max-width: 50rem) {
+  .submit {
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 37.5em) {
+  .message,
+  .submit {
+    padding: 5px;
+  }
 }

@@ -64,4 +64,15 @@ async function findChats(sender, receiver) {
   }
 }
 
-export { createUser, findUser, loginUser, findChats };
+async function findContacts(email) {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/users/user/${email}`,
+    );
+    return response;
+  } catch (error) {
+    if (error) throw error;
+  }
+}
+
+export { createUser, findUser, loginUser, findChats, findContacts };

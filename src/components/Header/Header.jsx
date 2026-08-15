@@ -1,20 +1,28 @@
 import styles from './Header.module.css';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import Profile from '../Profile';
+import useContact from '../../hooks/useContact';
 
 function Header() {
+  const [contact, onChangeContact] = useContact();
+  const navigate = useNavigate();
+  function onClickReset() {
+    onChangeContact(null);
+    navigate('/');
+  }
+
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>Messaging</div>
+      <div className={styles.logo}>
+        <button onClick={onClickReset} className={styles.reset}>
+          Messaging
+        </button>
+      </div>
       <nav className={styles.nav}>
         <ul className={styles.list}>
           <li className={styles.item}>
-            <Link className={styles.link} to='/users'>
-              New Chat
-            </Link>
-          </li>
-          <li className={styles.item}>
             <Link className={styles.link} to='/profile'>
-              Profile
+              <Profile />
             </Link>
           </li>
         </ul>

@@ -4,11 +4,24 @@
   padding: 20px;
   background-color: var(--main-color-background);
   color: var(--main-color-foreground);
+  align-items: baseline;
+}
+
+.logo {
+  font-weight: var(--font-weight-bold);
+  color: var(--main-color-foreground);
+}
+
+.reset {
+  background-color: transparent;
+  border: none;
+  color: inherit;
 }
 
 .list {
   list-style: none;
   display: flex;
+  align-items: baseline;
   gap: 20px;
 }
 
@@ -16,4 +29,7 @@
 .link:visited {
   color: var(--main-color-foreground);
   text-decoration: none;
+}
+
+@media screen and (max-width: 37.5rem) {
 }

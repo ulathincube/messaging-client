@@ -3,7 +3,9 @@ import useContact from '../../hooks/useContact';
 import { findUser } from '../../services/user';
 
 function PreviousChat({ email, lastMessage }) {
-  const [, onChangeContact] = useContact();
+  const [contact, onChangeContact] = useContact();
+
+  const active = contact?.email === email ? styles.active : '';
 
   async function loadChats() {
     try {
@@ -19,7 +21,7 @@ function PreviousChat({ email, lastMessage }) {
   }
 
   return (
-    <li className={styles.wrapper}>
+    <li className={`${styles.wrapper} ${active}`}>
       <button onClick={loadChats} className={styles.chat}>
         <h3 className={styles.user}>{email}</h3>
         <p className={styles.hint}>{lastMessage.message_text}</p>
