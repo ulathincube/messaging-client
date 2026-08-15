@@ -6,6 +6,7 @@ function PreviousChat({ email, lastMessage }) {
   const [contact, onChangeContact] = useContact();
 
   const active = contact?.email === email ? styles.active : '';
+  const firstLetter = email.charAt(0).toUpperCase();
 
   async function loadChats() {
     try {
@@ -23,7 +24,10 @@ function PreviousChat({ email, lastMessage }) {
   return (
     <li className={`${styles.wrapper} ${active}`}>
       <button onClick={loadChats} className={styles.chat}>
-        <h3 className={styles.user}>{email}</h3>
+        <h3 className={styles.user}>
+          <span className={styles.avatar}>{firstLetter}</span>
+          <span className={styles.email}>{email}</span>
+        </h3>
         <p className={styles.hint}>{lastMessage.message_text}</p>
       </button>
     </li>

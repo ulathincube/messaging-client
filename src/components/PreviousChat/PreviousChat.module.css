@@ -6,6 +6,20 @@
 .user {
   font-size: 1.1rem;
   color: var(--black);
+  display: flex;
+  gap: 15px;
+  align-items: baseline;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--black);
+  color: var(--main-color-foreground);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hint {
