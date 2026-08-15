@@ -5,6 +5,7 @@ import ChatBox from '../ChatBox';
 import useContact from '../../hooks/useContact';
 import PreviousChat from '../PreviousChat';
 import { findUser } from '../../services/user';
+import useAuth from '../../hooks/useAuth';
 
 function Main() {
   const [createChat, setCreateChat] = useState(false);
@@ -12,13 +13,19 @@ function Main() {
   const [chats, setChats] = useState([]);
   const [lastMessage, setLastMessage] = useState(null);
 
+  const [user] = useAuth();
+
   useEffect(() => {
+    if (!user) return;
     async function getChats() {
       let emails = [];
-      let users = [];
+
       try {
-        const response = await findUser('fakeuser@yahoo.com');
-        const { data } = await response.json();
+        // use prisma.message
+        const response = await findUser(user.email);
+
+        const { data, error, message } = await response.json();
+
         const allMessages = data.sentMessages
           .concat(data.receivedMessages)
           .sort(
@@ -26,6 +33,8 @@ function Main() {
               new Date(currentMessage.sent_time) -
               new Date(nextMessage.sent_time),
           );
+
+        if (allMessages.length === 0) return;
 
         const lastMessage_ = allMessages[allMessages.length - 1];
         setLastMessage(lastMessage_);
@@ -46,7 +55,9 @@ function Main() {
     }
 
     getChats();
-  }, []);
+  }, [user?.email, user]);
+
+  if (!user) return;
 
   function onToggleCreateChat() {
     setCreateChat(!createChat);

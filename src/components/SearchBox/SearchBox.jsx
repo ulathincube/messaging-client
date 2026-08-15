@@ -7,6 +7,7 @@ function SearchBox({ onCreateChat }) {
   const [email, setEmail] = useState('');
   const [contact, onChangeContact] = useContact();
   const [user, setUser] = useState(null);
+  const [error, setError] = useState(false);
 
   function onEmailChange({ target: { value } }) {
     setEmail(value);
@@ -19,7 +20,9 @@ function SearchBox({ onCreateChat }) {
       const response = await findUser(email);
 
       const { data, error, message } = await response.json();
-      console.log({ error, message });
+      console.log({ error, message, data });
+      if (!data) return setError(true);
+
       setUser(data);
     } catch (error) {
       console.log(error);
@@ -67,6 +70,13 @@ function SearchBox({ onCreateChat }) {
             <button onClick={onSelectUser} className={styles.select}>
               {user.email}
             </button>
+          </div>
+        </section>
+      )}
+      {error && (
+        <section className={styles.display}>
+          <div className={styles.result}>
+            <button className={styles.select}>User not found!</button>
           </div>
         </section>
       )}

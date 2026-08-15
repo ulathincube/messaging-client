@@ -1,19 +1,34 @@
 import styles from './ChatBox.module.css';
 import useContact from '../../hooks/useContact';
 import ChatMessage from '../ChatMessage/ChatMessage';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createMessage } from '../../services/message';
+import { findChats } from '../../services/user';
+import useAuth from '../../hooks/useAuth';
 
 function ChatBox() {
   const [contact] = useContact();
   const [message, setMessage] = useState('');
+  const [user] = useAuth();
+  const [chats, setChats] = useState([]);
 
-  const allMessages = contact.sentMessages
-    .concat(contact.receivedMessages)
-    .sort(
-      (currentMessage, nextMessage) =>
-        new Date(currentMessage.sent_time) - new Date(nextMessage.sent_time),
-    );
+  useEffect(() => {
+    async function runEffect() {
+      try {
+        console.log(contact.email);
+        const response = await findChats(user.email, contact.email);
+
+        const { data, error, message: message_ } = await response.json();
+        console.log({ data, error, message_ });
+        if (!data) setChats([]);
+        setChats([...data]);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    runEffect();
+  }, [user.email, contact.email]);
 
   function onMessageChange({ target: { value } }) {
     setMessage(value);
@@ -23,14 +38,11 @@ function ChatBox() {
     event.preventDefault();
 
     try {
-      const response = await createMessage(
-        message,
-        'fakeuser@yahoo.com',
-        'realuser@yahoo.com',
-      );
+      const response = await createMessage(message, user.email, contact.email);
 
-      const data = await response.json();
-      console.log(data);
+      const { data, error, message: message_ } = await response.json();
+      console.log({ data, error, message_ });
+      setChats(currentChats => [...currentChats, data]);
       setMessage('');
     } catch (error) {
       if (error) throw error;
@@ -41,9 +53,10 @@ function ChatBox() {
     <section className={styles.wrapper}>
       <div className={styles.contact}>{contact.email}</div>
       <article className={styles.chats}>
-        {allMessages.map(chatObject => (
-          <ChatMessage key={chatObject.message_id} chatMessage={chatObject} />
-        ))}
+        {chats.length > 0 &&
+          chats.map(chatObject => (
+            <ChatMessage key={chatObject.message_id} chatMessage={chatObject} />
+          ))}
       </article>
       <form className={styles.chat}>
         <div className={styles.group}>
