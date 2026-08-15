@@ -41,12 +41,18 @@
 
 .field {
   flex: 1;
+  background-color: var(--white);
 }
 
 .submit,
 .field {
   padding: 15px 5px;
   border: none;
+}
+
+.submit {
+  background-color: var(--black);
+  color: var(--main-color-foreground);
 }
 
 .wrapper {
@@ -57,8 +63,23 @@
   margin-top: auto;
 }
 
+.search,
+.display,
+.chat {
+  display: none;
+}
+
 @media screen and (max-width: 50rem) {
   .sidebar {
     display: none;
+  }
+
+  .search {
+    display: flex;
+  }
+
+  .display,
+  .chat {
+    display: block;
   }
 }

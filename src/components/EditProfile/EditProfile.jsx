@@ -1,12 +1,31 @@
 import styles from './EditProfile.module.css';
 import { editProfile } from '../../services/profile';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import useAuth from '../../hooks/useAuth';
+import { getProfileStatus } from '../../services/profile';
 
 function EditProfile() {
   const [status, setStatus] = useState('');
 
   const navigate = useNavigate();
+
+  const [user] = useAuth();
+
+  useEffect(() => {
+    const { email } = user;
+    async function runEffect() {
+      const response = await getProfileStatus(email);
+      const { data, message, error } = await response.json();
+      console.log({ data, message, error });
+
+      if (data && data.status) setStatus(data.status);
+    }
+
+    runEffect();
+  }, [user]);
+
+  console.log({ user });
 
   function onChangeStatus({ target: { value } }) {
     setStatus(value);
@@ -16,7 +35,7 @@ function EditProfile() {
     event.preventDefault();
 
     try {
-      const response = await editProfile('fakeuser@yahoo.com', status);
+      const response = await editProfile(user.email, status);
       const { data, error, message } = await response.json();
       console.log(data, error, message);
       navigate('/');
@@ -34,6 +53,7 @@ function EditProfile() {
             Status
           </label>
           <input
+            value={status}
             onChange={onChangeStatus}
             className={styles.field}
             type='text'

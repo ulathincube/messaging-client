@@ -14,4 +14,15 @@ async function editProfile(email, status) {
   }
 }
 
-export { editProfile };
+async function getProfileStatus(email) {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/profile/${email}`,
+    );
+    return response;
+  } catch (error) {
+    if (error) throw error;
+  }
+}
+
+export { editProfile, getProfileStatus };

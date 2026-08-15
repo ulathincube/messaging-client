@@ -13,7 +13,8 @@ function Main() {
   const [chats, setChats] = useState([]);
   const [lastMessage, setLastMessage] = useState(null);
   const [contacts, setContacts] = useState([]);
-
+  const [email, setEmail] = useState('');
+  const [person, setPerson] = useState(null);
   const [user] = useAuth();
 
   useEffect(() => {
@@ -26,6 +27,7 @@ function Main() {
         const { data, error, messages } = await response.json();
         console.log({ data });
         setContacts(data);
+        setPerson(null);
       } catch (error) {
         console.log(error);
       }
@@ -38,6 +40,24 @@ function Main() {
 
   function onToggleCreateChat() {
     setCreateChat(!createChat);
+  }
+
+  function onRemovePerson() {
+    setPerson(null);
+  }
+
+  async function searchUserHandler(event) {
+    event.preventDefault();
+    try {
+      const response = await findUser(email);
+      const { data, error, message } = await response.json();
+      if (!data) return;
+      console.log({ data, error, message });
+      setPerson(data);
+      setContacts([]);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   console.log({ contacts });
@@ -68,10 +88,12 @@ function Main() {
       <section className={styles.focus}>
         <div className={styles.wrapper}>
           {!contact && (
-            <form className={styles.search}>
+            <form onSubmit={searchUserHandler} className={styles.search}>
               <div className={styles.group}>
                 <input
-                  type='search'
+                  value={email}
+                  onChange={event => setEmail(event.target.value)}
+                  type='email'
                   name='search'
                   id='search'
                   className={styles.field}
@@ -92,12 +114,19 @@ function Main() {
                   lastMessage={'Hello World'}
                 />
               ))}
+            {person && (
+              <PreviousChat
+                email={person.email}
+                lastMessage={'Hello World'}
+                onRemovePerson={onRemovePerson}
+              />
+            )}
           </section>
           {contact && <ChatBox />}
         </div>
         <article className={styles.bottom}>
           <>
-            {!createChat && (
+            {!createChat && !contact && (
               <button className={styles.chat} onClick={onToggleCreateChat}>
                 New Chat
               </button>

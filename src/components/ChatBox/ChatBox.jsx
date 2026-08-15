@@ -4,6 +4,7 @@ import ChatMessage from '../ChatMessage/ChatMessage';
 import { useState, useEffect } from 'react';
 import { createMessage } from '../../services/message';
 import { findChats } from '../../services/user';
+import { getProfileStatus } from '../../services/profile';
 import useAuth from '../../hooks/useAuth';
 
 function ChatBox() {
@@ -11,17 +12,29 @@ function ChatBox() {
   const [message, setMessage] = useState('');
   const [user] = useAuth();
   const [chats, setChats] = useState([]);
+  const [userStatus, setUserStatus] = useState(null);
 
   useEffect(() => {
     async function runEffect() {
       try {
         console.log(contact.email);
         const response = await findChats(user.email, contact.email);
-
         const { data, error, message: message_ } = await response.json();
+
+        const res = await getProfileStatus(contact.email);
+        const {
+          data: data_,
+          error: error_,
+          message: _message,
+        } = await res.json();
+
         console.log({ data, error, message_ });
+        console.log({ data_, error_, _message });
+
         if (!data) setChats([]);
         setChats([...data]);
+        if (!data_) setUserStatus('Available');
+        setUserStatus(data_.status);
       } catch (error) {
         console.log(error);
       }
@@ -51,7 +64,10 @@ function ChatBox() {
 
   return (
     <section className={styles.wrapper}>
-      <div className={styles.contact}>{contact.email}</div>
+      <div className={styles.contact}>
+        <span className={styles.name}>{contact.email}</span>
+        <span className={styles.status}>{userStatus}</span>
+      </div>
       <article className={styles.chats}>
         {chats.length > 0 &&
           chats.map(chatObject => (

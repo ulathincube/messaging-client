@@ -2,7 +2,7 @@ import styles from './PreviousChat.module.css';
 import useContact from '../../hooks/useContact';
 import { findUser } from '../../services/user';
 
-function PreviousChat({ email, lastMessage }) {
+function PreviousChat({ email, lastMessage, onRemovePerson = () => {} }) {
   const [contact, onChangeContact] = useContact();
 
   const active = contact?.email === email ? styles.active : '';
@@ -14,6 +14,7 @@ function PreviousChat({ email, lastMessage }) {
       const { data, error, message } = await response.json();
       if (data !== null) {
         onChangeContact(data);
+        onRemovePerson();
         console.log(error, message);
       }
     } catch (error) {
