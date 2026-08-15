@@ -1,6 +1,7 @@
 .wrapper {
   background-color: var(--gray);
-  padding: 10px;
+  padding: 20px;
+  border-bottom: 10px solid var(--black);
 }
 
 .user {
