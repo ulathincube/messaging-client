@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { useState } from 'react';
 import { createUser } from '../../services/user';
 import { Link } from 'react-router';
+import Spacer from '../Spacer';
 
 function Register({ onToggle }) {
   const [email, setEmail] = useState('');
@@ -64,9 +65,11 @@ function Register({ onToggle }) {
               required
             />
           </div>
-          <div className={styles.group}>
-            <button className={styles.submit}>Register</button>
-          </div>
+          <Spacer marginTop={5}>
+            <div className={styles.group}>
+              <button className={styles.submit}>Register</button>
+            </div>
+          </Spacer>
         </form>
         <div className={styles.aside}>
           <button onClick={onToggle} className={styles.action}>

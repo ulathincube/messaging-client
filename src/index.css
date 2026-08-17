@@ -2,14 +2,29 @@
   /* colors go here */
   --font-weight-normal: 500;
   --font-weight-bold: 800;
-  --main-color-background: hsl(220deg 85% 45%);
+
   --main-color-foreground: hsl(220deg 30% 95%);
   --supporting-color: hsl(220deg 70% 90%);
   --white: hsl(220deg 20% 95%);
   --supporting-color-darker: hsl(220deg 100% 85%);
-  --black: hsl(220deg 70% 10%);
+
   --gray: hsl(220deg 30% 30%);
   --backdrop-color: hsl(220deg 90% 90% / 0.9);
+
+  --main-color-strong: hsl(220deg 95% 45%);
+  --main-color: hsl(220deg 30% 25%);
+  --contrast-color: hsl(30deg 100% 50%);
+  --main-color-lighter: hsl(220deg 20% 35%);
+  --text-color: hsl(220deg 10% 85%);
+  --text-color-darker: hsl(220deg 20% 75%);
+  --button-padding: 10px 20px;
+  --shadow: 1px 2px 2px hsl(220deg 30% 10% / 0.25);
+  --card-color: hsl(220deg 30% 15%);
+  --light-border: 1px solid var(--text-color);
+  --font-size-small: 1rem;
+  --font-size-medium: 1.2rem;
+  --font-size-large: 1.5rem;
+  --black: hsl(220deg 35% 20%);
 }
 
 /* 1. Use a more-intuitive box-sizing model */
@@ -36,8 +51,8 @@ body {
   line-height: 1.5;
   /* 5. Improve text rendering */
   -webkit-font-smoothing: antialiased;
-  background-color: var(--white);
-  color: var(--black);
+  background-color: var(--main-color);
+  color: var(--text-color);
 }
 
 /* 6. Improve media defaults */

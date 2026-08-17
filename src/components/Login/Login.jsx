@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { loginUser } from '../../services/user';
 import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router';
+import Spacer from '../Spacer';
 
 function Login({ onToggle }) {
   const [email, setEmail] = useState('');
@@ -69,9 +70,11 @@ function Login({ onToggle }) {
               required
             />
           </div>
-          <div className={styles.group}>
-            <button className={styles.submit}>Login</button>
-          </div>
+          <Spacer marginTop={5}>
+            <div className={styles.group}>
+              <button className={styles.submit}>Login</button>
+            </div>
+          </Spacer>
         </form>
         <div className={styles.aside}>
           <button onClick={onToggle} className={styles.action}>
