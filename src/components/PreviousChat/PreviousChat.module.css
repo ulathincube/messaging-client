@@ -1,5 +1,5 @@
 .wrapper {
-  padding: 20px;
+  padding: 10px;
   border-bottom: var(--lighter-border);
 }
 
@@ -36,7 +36,7 @@
 }
 
 .active {
-  background-color: var(--supporting-color-darker);
+  background-color: var(--main-color-strong);
   /* border-bottom: none; */
   color: var(--main-color-foreground);
 }

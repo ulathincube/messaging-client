@@ -4,7 +4,7 @@
 }
 
 .sidebar {
-  background-color: var(--supporting-color);
+  background-color: var(--main-color-lighter);
   flex: 2;
   display: flex;
   flex-direction: column;
