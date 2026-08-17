@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex: 1;
+  padding: 10px;
 }
 
 .form {
@@ -17,7 +19,7 @@
 }
 
 .field {
-  border: 1px solid var(--black);
+  border: 1px solid var(--main-color-lighter);
 }
 
 .label {
@@ -43,7 +45,7 @@
   padding: 15px;
   flex: 1;
   background-color: var(--main-color-lighter);
-  border: none;
+  border: var(--light-border);
   color: var(--text-color);
 }
 
@@ -74,6 +76,13 @@
   font-size: var(--font-size-small);
 }
 
+.button,
+.cancel,
+.submit,
+.search {
+  border-radius: var(--border-radius);
+}
+
 .button {
   background-color: var(--main-color-strong);
   color: var(--main-color-foreground);
@@ -82,4 +91,14 @@
 .cancel {
   background-color: var(--supporting-color-darker);
   color: var(--main-color-background);
+}
+
+.mobile {
+  display: none;
+}
+
+@media screen and (max-width: 50rem) {
+  .mobile {
+    display: block;
+  }
 }

@@ -88,4 +88,12 @@ function SearchBox({ onCreateChat }) {
   );
 }
 
+export function MobileSearchBox({ onCreateChat }) {
+  return (
+    <div className={styles.mobile}>
+      <SearchBox onCreateChat={onCreateChat} />
+    </div>
+  );
+}
+
 export default SearchBox;

@@ -1,6 +1,6 @@
 import styles from './Main.module.css';
 import { useState, useEffect } from 'react';
-import SearchBox from '../SearchBox/SearchBox';
+import SearchBox, { MobileSearchBox } from '../SearchBox/SearchBox';
 import ChatBox from '../ChatBox';
 import useContact from '../../hooks/useContact';
 import PreviousChat from '../PreviousChat';
@@ -79,7 +79,7 @@ function Main() {
           </div>
         ) : (
           <div className={styles.new}>
-            <button className={styles.chat} onClick={onToggleCreateChat}>
+            <button className={styles.create} onClick={onToggleCreateChat}>
               New Chat
             </button>
           </div>
@@ -133,7 +133,7 @@ function Main() {
             )}
             {!contact && createChat && (
               <div className={styles.flex}>
-                <SearchBox onCreateChat={onToggleCreateChat} />
+                <MobileSearchBox onCreateChat={onToggleCreateChat} />
               </div>
             )}
           </>
