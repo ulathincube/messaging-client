@@ -132,7 +132,9 @@ function Main() {
               </button>
             )}
             {!contact && createChat && (
-              <SearchBox onCreateChat={onToggleCreateChat} />
+              <div className={styles.flex}>
+                <SearchBox onCreateChat={onToggleCreateChat} />
+              </div>
             )}
           </>
         </article>

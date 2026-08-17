@@ -11,7 +11,6 @@
 }
 
 .focus {
-  background-color: var(--supporting-color-darker);
   flex: 7;
   display: flex;
   flex-direction: column;
@@ -22,16 +21,24 @@
 }
 
 .chat {
-  background-color: var(--main-color-background);
-  color: var(--main-color-foreground);
+  background-color: var(--main-color-strong);
+  color: var(--text-color);
   border: none;
   margin-top: auto;
-  padding: 20px;
-  width: 100%;
+  padding: 15px;
+  flex: 1;
+
+  /* width: 100%; */
+}
+
+.flex {
+  flex: 1;
+  padding: 10px;
 }
 
 .search {
   display: flex;
+  padding: 10px;
 }
 
 .group:nth-child(1) {
@@ -41,18 +48,19 @@
 
 .field {
   flex: 1;
-  background-color: var(--white);
+  background-color: var(--main-color-lighter);
+  border: none;
 }
 
 .submit,
 .field {
-  padding: 15px 5px;
+  padding: 15px;
   border: none;
 }
 
 .submit {
-  background-color: var(--black);
-  color: var(--main-color-foreground);
+  background-color: var(--main-color-strong);
+  color: var(--text-color);
 }
 
 .wrapper {
@@ -61,6 +69,7 @@
 
 .bottom {
   margin-top: auto;
+  display: flex;
 }
 
 .search,

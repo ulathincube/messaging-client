@@ -1,5 +1,5 @@
 import styles from './SearchBox.module.css';
-import { useState } from 'react';
+import { useState, useId } from 'react';
 import { findUser } from '../../services/user';
 import useContact from '../../hooks/useContact';
 
@@ -8,6 +8,9 @@ function SearchBox({ onCreateChat }) {
   const [contact, onChangeContact] = useContact();
   const [user, setUser] = useState(null);
   const [error, setError] = useState(false);
+
+  const componentId = useId();
+  const searchFieldId = `search-${componentId}`;
 
   function onEmailChange({ target: { value } }) {
     setEmail(value);
@@ -38,13 +41,13 @@ function SearchBox({ onCreateChat }) {
     <article className={styles.wrapper}>
       <form className={styles.form} onSubmit={onSearchHandler}>
         <div className={styles.group}>
-          <label className={styles.title} htmlFor='search'>
+          <label className={styles.label} htmlFor={searchFieldId}>
             Search User
           </label>
           <input
             value={email}
             type='email'
-            id='search'
+            id={searchFieldId}
             placeholder='janedoe@mail.com'
             required
             onChange={onEmailChange}

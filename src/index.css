@@ -21,6 +21,7 @@
   --shadow: 1px 2px 2px hsl(220deg 30% 10% / 0.25);
   --card-color: hsl(220deg 30% 15%);
   --light-border: 1px solid var(--text-color);
+  --lighter-border: 2px solid var(--main-color-lighter);
   --font-size-small: 1rem;
   --font-size-medium: 1.2rem;
   --font-size-large: 1.5rem;

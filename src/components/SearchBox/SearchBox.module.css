@@ -20,8 +20,9 @@
   border: 1px solid var(--black);
 }
 
-.title {
-  font-size: 1.3rem;
+.label {
+  font-size: var(--font-size-medium);
+  color: var(--text-color);
 }
 
 .result {
@@ -39,9 +40,11 @@
 }
 
 .search {
-  padding: 20px;
+  padding: 15px;
   flex: 1;
-  border: 2px solid var(--main-color-background);
+  background-color: var(--main-color-lighter);
+  border: none;
+  color: var(--text-color);
 }
 
 .search:focus {
@@ -49,7 +52,7 @@
 }
 
 .search::placeholder {
-  color: var(--gray);
+  color: var(--text-color);
 }
 
 .error {
@@ -68,11 +71,11 @@
   padding: 20px;
   border: none;
   flex: 1;
-  font-size: 1.1rem;
+  font-size: var(--font-size-small);
 }
 
 .button {
-  background-color: var(--main-color-background);
+  background-color: var(--main-color-strong);
   color: var(--main-color-foreground);
 }
 
