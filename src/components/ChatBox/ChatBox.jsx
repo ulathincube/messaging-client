@@ -62,11 +62,20 @@ function ChatBox() {
     }
   }
 
+  const firstLetter = contact.email.charAt(0).toUpperCase();
+
   return (
     <section className={styles.wrapper}>
       <div className={styles.contact}>
-        <span className={styles.name}>{contact.email}</span>
-        <span className={styles.status}>{userStatus}</span>
+        <div className={styles.flex}>
+          <div className={styles.avatar}>
+            <span>{firstLetter}</span>
+          </div>
+        </div>
+        <div className={styles.details}>
+          <span className={styles.name}>{contact.email}</span>
+          <span className={styles.status}>{userStatus}</span>
+        </div>
       </div>
       <article className={styles.chats}>
         {chats.length > 0 &&
@@ -87,9 +96,8 @@ function ChatBox() {
             value={message}
             onChange={onMessageChange}
             className={styles.message}
-          >
-            Say Hi!
-          </textarea>
+            placeholder='Say Hello!'
+          ></textarea>
         </div>
         <div className={styles.group}>
           <button onClick={onSendMessage} className={styles.submit}>

@@ -6,6 +6,7 @@
 
 .chats {
   padding: 10px;
+  padding-top: 20px;
   display: flex;
   gap: 10px;
   flex-direction: column;
@@ -14,10 +15,27 @@
 .contact {
   background-color: var(--black);
   color: var(--main-color-foreground);
-  padding: 20px;
+  padding: 15px;
   display: flex;
-  flex-direction: column;
+  gap: 10px;
+}
+
+.details {
+  display: flex;
   gap: 5px;
+  flex-direction: column;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--border-radius-circle);
+  color: var(--text-color);
+  background-color: var(--main-color);
+  border: var(--light-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .status {
@@ -28,6 +46,7 @@
   display: flex;
   margin-top: auto;
   align-items: stretch;
+  padding: 10px;
 }
 
 .group {
@@ -46,14 +65,18 @@
 }
 
 .submit {
-  background-color: var(--main-color-background);
-  color: var(--main-color-foreground);
+  background-color: var(--main-color-strong);
+  color: var(--text-color);
   padding: 0 60px;
+  border-radius: var(--border-radius-right-side);
 }
 
 .message {
   width: 100%;
   resize: none;
+  background-color: var(--main-color-lighter);
+  border-radius: var(--border-radius-left-side);
+  color: var(--text-color);
 }
 
 @media screen and (max-width: 50rem) {
