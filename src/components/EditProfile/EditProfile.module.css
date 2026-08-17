@@ -1,37 +1,46 @@
 .wrapper {
   padding: 10px;
-  background-color: var(--supporting-color);
+  background-color: var(--main-color);
   flex: 1;
+  color: var(--text-color);
 }
 
 .form {
   display: flex;
   flex-direction: column;
   max-width: 500px;
-  gap: 10px;
+  gap: 15px;
 }
 
 .group {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .caption {
-  font-size: 1.8rem;
+  font-size: var(--font-size-large);
 }
 
 .label {
-  font-size: 1.2rem;
+  font-size: var(--font-size-medium);
 }
 
 .field,
 .submit {
-  padding: 5px;
+  padding: 15px;
+  border-radius: var(--border-radius);
+}
+
+.field {
+  border: none;
+  background-color: var(--main-color-lighter);
+  border: var(--light-border);
+  color: var(--text-color);
 }
 
 .submit {
-  padding: 5px 10px;
   border: none;
-  background-color: var(--main-color-background);
-  color: var(--main-color-foreground);
+  background-color: var(--main-color-strong);
+  color: var(--text-color);
 }
