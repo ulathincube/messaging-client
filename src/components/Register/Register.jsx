@@ -4,10 +4,12 @@ import { useState } from 'react';
 import { createUser } from '../../services/user';
 import { Link } from 'react-router';
 import Spacer from '../Spacer';
+import useStatus from '../../hooks/useStatus';
 
 function Register({ onToggle }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { message, onChangeMessage, status, onChangeStatus } = useStatus();
 
   async function registerUserHandler(event) {
     event.preventDefault();
@@ -16,9 +18,17 @@ function Register({ onToggle }) {
       const response = await createUser(email, password);
 
       if (!response.ok) throw new Error('An error occurred');
-      const data = await response.json();
+      const { data, error, message } = await response.json();
+      if (!data && error) {
+        onChangeStatus('error');
+        onChangeMessage(message);
+        return;
+      }
+      onChangeStatus('success');
+      onChangeMessage(message);
     } catch (error) {
-      // toast?
+      onChangeStatus('error');
+      onChangeMessage(error.message);
       console.log(error);
     }
   }

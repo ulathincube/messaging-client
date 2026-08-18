@@ -5,26 +5,45 @@ import { loginUser } from '../../services/user';
 import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router';
 import Spacer from '../Spacer';
+import useStatus from '../../hooks/useStatus';
 
 function Login({ onToggle }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { status, onChangeStatus, message, onChangeMessage } = useStatus();
+  // idle, loading, error, success
   const [user, onChangeUser] = useAuth();
   const navigate = useNavigate();
 
   async function loginUserHandler(event) {
     event.preventDefault();
-    if (!email || !password) return;
+    if (!email || !password) {
+      onChangeStatus('error');
+      onChangeMessage('Invalid login details');
+      return;
+    }
     try {
       const response = await loginUser(email, password);
 
-      if (!response.ok) throw new Error('An error occurred');
-      const data = await response.json();
-      onChangeUser(data);
-      navigate('/');
+      if (!response.ok) {
+        onChangeStatus('error');
+        onChangeMessage(response.statusText);
+        return;
+      }
+      const { data, error, message } = await response.json();
+
+      if (!error) {
+        onChangeStatus('success');
+        onChangeMessage(message);
+        onChangeUser(data);
+        navigate('/');
+      } else {
+        onChangeStatus('error');
+        onChangeMessage(message);
+      }
     } catch (error) {
-      // toast?
-      console.log(error);
+      onChangeStatus('error');
+      onChangeMessage('Unable to login at this time!');
     }
   }
 
