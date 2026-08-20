@@ -1,7 +1,6 @@
 .main {
   flex: 1;
   display: flex;
-  padding-top: 15px;
 }
 
 .sidebar {
@@ -15,6 +14,32 @@
   flex: 7;
   display: flex;
   flex-direction: column;
+}
+
+.chats {
+  color: var(--text-color);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  padding: 20px;
+}
+
+.chats svg {
+  line-height: 0;
 }
 
 .new {

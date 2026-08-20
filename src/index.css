@@ -26,6 +26,7 @@
   --font-size-medium: 1.2rem;
   --font-size-large: 1.5rem;
   --black: hsl(220deg 35% 20%);
+  --black-opaque: hsl(220deg 35% 20% / 0.85);
   --border-radius: 4px;
   --border-radius-left-side: var(--border-radius) 0 0 var(--border-radius);
   --border-radius-right-side: 0 var(--border-radius) var(--border-radius) 0;
@@ -120,6 +121,7 @@ body {
   font-weight: var(--font-weight-normal);
   color: var(--black);
   font-size: 1.1rem;
+  position: relative;
 }
 
 #root {

@@ -69,6 +69,14 @@
   color: var(--text-color);
   padding: 0 60px;
   border-radius: var(--border-radius-right-side);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.submit svg {
+  line-height: 0;
 }
 
 .message {

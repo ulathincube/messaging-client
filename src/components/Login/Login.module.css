@@ -73,6 +73,16 @@
   border: none;
   padding: 16px;
   font-size: var(--font-size-medium);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit svg {
+  line-height: 0;
+  width: 24px;
+  height: 24px;
 }
 
 .aside {

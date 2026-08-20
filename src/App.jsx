@@ -10,6 +10,7 @@ import { useState, useMemo } from 'react';
 import Authenticate from './pages/Authenticate';
 import Protected from './components/Protected';
 import Toast from './components/Toast';
+import Loader from './components/Loader';
 
 function App() {
   const [contact, setContact] = useState(null);
@@ -55,7 +56,8 @@ function App() {
     <AuthContext value={userValue}>
       <ContactContext value={contactValue}>
         <StatusContext value={statusValue}>
-          <Toast>Testing: How it went</Toast>
+          <Loader />
+          <Toast />
           <Routes>
             <Route path='auth' element={<Authenticate />}></Route>
             <Route element={<Protected />}>
