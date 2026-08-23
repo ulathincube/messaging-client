@@ -6,17 +6,26 @@ import Messages from './pages/Messages';
 import ContactContext from './store/contact';
 import StatusContext from './store/status';
 import AuthContext from './store/auth';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Authenticate from './pages/Authenticate';
 import Protected from './components/Protected';
 import Toast from './components/Toast';
 import Loader from './components/Loader';
+import { wakeServerUp } from './services';
 
 function App() {
   const [contact, setContact] = useState(null);
   const [user, setUser] = useState(null);
   const [status, setStatus] = useState('idle');
   const [message, setMessage] = useState(null);
+
+  useEffect(() => {
+    async function runEffect() {
+      await wakeServerUp();
+    }
+
+    runEffect();
+  }, []);
 
   function onChangeContact(newContact) {
     setContact(newContact);
