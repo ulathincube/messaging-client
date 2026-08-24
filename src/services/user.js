@@ -75,4 +75,20 @@ async function findContacts(email) {
   }
 }
 
-export { createUser, findUser, loginUser, findChats, findContacts };
+async function findAllUsers() {
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/users`);
+    return response;
+  } catch (error) {
+    if (error) throw error;
+  }
+}
+
+export {
+  createUser,
+  findUser,
+  loginUser,
+  findChats,
+  findContacts,
+  findAllUsers,
+};

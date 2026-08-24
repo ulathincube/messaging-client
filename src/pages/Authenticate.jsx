@@ -15,6 +15,11 @@ function toggleVisibility(visibility = true) {
 function Authenticate() {
   // login => app // register => login
   const [register, setRegister] = useState(false);
+  const [registeredEmail, setRegisteredEmail] = useState('');
+
+  function onRegister(providedEmail) {
+    setRegisteredEmail(providedEmail);
+  }
 
   useEffect(() => {
     toggleVisibility();
@@ -26,9 +31,9 @@ function Authenticate() {
   }
 
   return register ? (
-    <Register onToggle={toggleAuthentication} />
+    <Register onRegister={onRegister} onToggle={toggleAuthentication} />
   ) : (
-    <Login onToggle={toggleAuthentication} />
+    <Login registeredEmail={registeredEmail} onToggle={toggleAuthentication} />
   );
 }
 

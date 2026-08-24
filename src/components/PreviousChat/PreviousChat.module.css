@@ -1,14 +1,18 @@
 .wrapper {
   padding: 10px;
-  border-bottom: var(--lighter-border);
 }
 
 .user {
   font-size: var(--font-size-small);
   color: var(--text-color);
   display: flex;
-  gap: 10px;
-  align-items: baseline;
+  gap: 15px;
+  align-items: center;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
 }
 
 .avatar {
@@ -20,6 +24,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid var(--main-color-foreground);
 }
 
 .hint {
@@ -36,7 +41,7 @@
 }
 
 .active {
-  background-color: var(--main-color-strong);
+  background-color: var(--backdrop-color-dark);
   /* border-bottom: none; */
   color: var(--main-color-foreground);
 }

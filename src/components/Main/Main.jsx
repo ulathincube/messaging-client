@@ -4,14 +4,12 @@ import SearchBox, { MobileSearchBox } from '../SearchBox/SearchBox';
 import ChatBox from '../ChatBox';
 import useContact from '../../hooks/useContact';
 import PreviousChat from '../PreviousChat';
-import { findUser, findContacts } from '../../services/user';
+import { findUser, findAllUsers } from '../../services/user';
 import useAuth from '../../hooks/useAuth';
 
 function Main() {
-  const [createChat, setCreateChat] = useState(false);
   const [contact] = useContact();
-  const [chats, setChats] = useState([]);
-  const [lastMessage, setLastMessage] = useState(null);
+
   const [contacts, setContacts] = useState([]);
   const [email, setEmail] = useState('');
   const [person, setPerson] = useState(null);
@@ -23,10 +21,13 @@ function Main() {
     async function runEffect() {
       const { email } = user;
       try {
-        const response = await findContacts(email);
-        const { data, error, messages } = await response.json();
-        console.log({ data });
-        setContacts(data);
+        const response = await findAllUsers();
+        const { data, error, message } = await response.json();
+        console.log({ data, error, message });
+        const filteredContacts = data.filter(
+          personObject => personObject.email !== email,
+        );
+        setContacts(filteredContacts);
         setPerson(null);
       } catch (error) {
         console.log(error);
@@ -38,16 +39,21 @@ function Main() {
 
   if (!user) return;
 
-  function onToggleCreateChat() {
-    setCreateChat(!createChat);
-  }
+  // function onToggleCreateChat() {
+  //   setCreateChat(!createChat);
+  // }
 
   function onRemovePerson() {
     setPerson(null);
   }
 
+  function onEmailChange(event) {
+    setEmail(event.target.value);
+  }
+
   async function searchUserHandler(event) {
     event.preventDefault();
+
     try {
       const response = await findUser(email);
       const { data, error, message } = await response.json();
@@ -95,17 +101,33 @@ function Main() {
               ))}
           </ul>
         </article>
-        {createChat ? (
+        {/* {createChat ? (
           <div className={styles.new}>
             <SearchBox onCreateChat={onToggleCreateChat} />
           </div>
         ) : (
           <div className={styles.new}>
             <button className={styles.create} onClick={onToggleCreateChat}>
-              New Chat
+              <span className={styles.text}>New Chat</span>
+              <span className={styles.icon}>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='24'
+                  height='24'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  stroke-width='2'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                  class='feather feather-message-circle'
+                >
+                  <path d='M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z'></path>
+                </svg>
+              </span>
             </button>
           </div>
-        )}
+        )} */}
       </aside>
       <section className={styles.focus}>
         <div className={styles.wrapper}>
@@ -114,7 +136,7 @@ function Main() {
               <div className={styles.group}>
                 <input
                   value={email}
-                  onChange={event => setEmail(event.target.value)}
+                  onChange={onEmailChange}
                   type='email'
                   name='search'
                   id='search'
@@ -168,16 +190,16 @@ function Main() {
         </div>
         <article className={styles.bottom}>
           <>
-            {!createChat && !contact && (
+            {/* {!createChat && !contact && (
               <button className={styles.chat} onClick={onToggleCreateChat}>
                 New Chat
               </button>
-            )}
-            {!contact && createChat && (
+            )} */}
+            {/* {!contact && (
               <div className={styles.flex}>
                 <MobileSearchBox onCreateChat={onToggleCreateChat} />
               </div>
-            )}
+            )} */}
           </>
         </article>
       </section>

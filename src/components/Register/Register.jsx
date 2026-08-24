@@ -5,11 +5,14 @@ import { createUser } from '../../services/user';
 import { Link } from 'react-router';
 import Spacer from '../Spacer';
 import useStatus from '../../hooks/useStatus';
+import { useNavigate } from 'react-router';
 
-function Register({ onToggle }) {
+function Register({ onToggle, onRegister }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { message, onChangeMessage, status, onChangeStatus } = useStatus();
+
+  const navigate = useNavigate();
 
   async function registerUserHandler(event) {
     event.preventDefault();
@@ -28,6 +31,8 @@ function Register({ onToggle }) {
       }
       onChangeStatus('success');
       onChangeMessage(message);
+      onRegister(email);
+      navigate('/login');
     } catch (error) {
       onChangeStatus('error');
       onChangeMessage(error.message);

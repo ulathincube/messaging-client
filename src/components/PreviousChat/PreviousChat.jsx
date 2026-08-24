@@ -27,9 +27,11 @@ function PreviousChat({ email, lastMessage, onRemovePerson = () => {} }) {
       <button onClick={loadChats} className={styles.chat}>
         <h3 className={styles.user}>
           <span className={styles.avatar}>{firstLetter}</span>
-          <span className={styles.email}>{email}</span>
+          <div className={styles.details}>
+            <span className={styles.email}>{email}</span>
+            <span className={styles.hint}>{lastMessage}</span>
+          </div>
         </h3>
-        <p className={styles.hint}>{lastMessage.message_text}</p>
       </button>
     </li>
   );

@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router';
 import Spacer from '../Spacer';
 import useStatus from '../../hooks/useStatus';
 
-function Login({ onToggle }) {
-  const [email, setEmail] = useState('');
+function Login({ onToggle, registeredEmail = '' }) {
+  const [email, setEmail] = useState(registeredEmail);
   const [password, setPassword] = useState('');
   const { status, onChangeStatus, message, onChangeMessage } = useStatus();
   // idle, loading, error, success
