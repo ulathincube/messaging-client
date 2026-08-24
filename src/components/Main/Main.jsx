@@ -1,6 +1,5 @@
 import styles from './Main.module.css';
 import { useState, useEffect } from 'react';
-import SearchBox, { MobileSearchBox } from '../SearchBox/SearchBox';
 import ChatBox from '../ChatBox';
 import useContact from '../../hooks/useContact';
 import PreviousChat from '../PreviousChat';
