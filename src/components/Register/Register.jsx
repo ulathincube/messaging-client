@@ -2,40 +2,33 @@ import styles from './Register.module.css';
 import { createPortal } from 'react-dom';
 import { useState } from 'react';
 import { createUser } from '../../services/user';
-import { Link } from 'react-router';
 import Spacer from '../Spacer';
 import useStatus from '../../hooks/useStatus';
 import { useNavigate } from 'react-router';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 function Register({ onToggle, onRegister }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { onChangeStatus } = useStatus();
-
-  const { data, error, isLoading, refetch } = useQuery({
-    queryKey: ['register'],
-    queryFn: () => createUser(email, password),
-  });
-
   const navigate = useNavigate();
+
+  const mutation = useMutation({
+    mutationFn: ({ email, password }) => createUser(email, password),
+    onSuccess: data => {
+      onChangeStatus({ type: 'success', message: data.data.message });
+      onRegister(email);
+      navigate('/login');
+    },
+    onError: error => {
+      onChangeStatus({ type: 'error', message: error.message });
+    },
+  });
 
   async function registerUserHandler(event) {
     event.preventDefault();
     if (!email || !password) return;
-    isLoading && onChangeStatus('loading');
-    refetch();
-
-    try {
-      if (error)
-        return onChangeStatus({ type: 'error', message: error.message });
-
-      onChangeStatus({ type: 'success', message: data.message });
-      onRegister(email);
-      navigate('/login');
-    } catch (error) {
-      onChangeStatus({ type: 'error', message: error.message });
-    }
+    mutation.mutate({ email, password });
   }
 
   function onEmailChange({ target: { value } }) {

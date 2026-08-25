@@ -3,84 +3,43 @@ import { useState } from 'react';
 import ChatBox from '../ChatBox';
 import useContact from '../../hooks/useContact';
 import PreviousChat from '../PreviousChat';
-import { findUser, findAllUsers } from '../../services/user';
+import { findAllUsers } from '../../services/user';
 import useAuth from '../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import useStatus from '../../hooks/useStatus';
 
 function Main() {
   const [contact] = useContact();
-
   const [contacts, setContacts] = useState([]);
   const [email, setEmail] = useState('');
-  const [person, setPerson] = useState(null);
   const [user] = useAuth();
+  const { onChangeStatus } = useStatus();
 
   const { data, error, isLoading } = useQuery({
     queryKey: ['findAllUsers'],
-    queryFn: findAllUsers,
+    queryFn: () => {
+      if (isLoading) {
+        onChangeStatus({ type: 'loading', message: '' });
+      }
+
+      if (error) {
+        onChangeStatus({ type: 'error', message: error.message });
+      }
+
+      return findAllUsers();
+    },
   });
 
-  const { onChangeStatus } = useStatus();
-
-  const {
-    data: _data,
-    error: _error,
-    isLoading: _isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ['findUser'],
-    queryFn: () => findUser(email),
-    enabled: false,
-  });
-
-  // handle state
-
-  // useEffect(() => {
-  //   if (!user) return;
-
-  //   async function runEffect() {
-  //     try {
-  //       const response = await findAllUsers();
-  //       const { data, error, message } = await response.json();
-  //       console.log({ data, error, message });
-  //       const filteredContacts = data.filter(
-  //         personObject => personObject.email !== email,
-  //       );
-  //       setContacts(filteredContacts);
-  //       setPerson(null);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-
-  //   runEffect();
-  // }, [user]);
-
-  // function onToggleCreateChat() {
-  //   setCreateChat(!createChat);
-  // }
-
-  function onRemovePerson() {
-    setPerson(null);
-  }
+  console.log({ data });
 
   function onEmailChange(event) {
+    const nextValue = event.target.value;
+    if (!nextValue) return;
+    const nextContacts = contacts.filter(
+      contactObject => contactObject.email === nextValue,
+    );
+    setContacts(nextContacts);
     setEmail(event.target.value);
-  }
-
-  async function searchUserHandler(event) {
-    event.preventDefault();
-
-    onChangeStatus({ type: 'loading', message: '' });
-
-    try {
-      refetch();
-      setPerson(_data);
-      setContacts([]);
-    } catch (error) {
-      onChangeStatus({ type: 'error', message: error.message });
-    }
   }
 
   return (
@@ -106,22 +65,24 @@ function Main() {
             </span>
           </h2>
           <ul className={styles.list}>
-            {contacts.length > 0 &&
-              contacts.map(contactObject => (
-                <PreviousChat
-                  contact={contactObject}
-                  key={contactObject.email}
-                  email={contactObject.email}
-                  lastMessage={'Hello World'}
-                />
-              ))}
+            {data &&
+              data?.data
+                .filter(contactObject => contactObject.email !== user?.email)
+                .map(contactObject => (
+                  <PreviousChat
+                    contact={contactObject}
+                    key={contactObject.email}
+                    email={contactObject.email}
+                    lastMessage={'Hello World'}
+                  />
+                ))}
           </ul>
         </article>
       </aside>
       <section className={styles.focus}>
         <div className={styles.wrapper}>
           {!contact && (
-            <form onSubmit={searchUserHandler} className={styles.search}>
+            <form className={styles.search}>
               <div className={styles.group}>
                 <input
                   value={email}
@@ -132,13 +93,10 @@ function Main() {
                   className={styles.field}
                 />
               </div>
-              <div className={styles.group}>
-                <button className={styles.submit}>Search</button>
-              </div>
             </form>
           )}
           <section className={styles.display}>
-            {!contact && contacts.length > 0 && (
+            {!contact && (
               <article className={styles.chats}>
                 <h2 className={styles.title}>
                   <span className={styles.text}>Chats</span>
@@ -158,21 +116,22 @@ function Main() {
                     </svg>
                   </span>
                 </h2>
-                {contacts.map(contactObject => (
-                  <PreviousChat
-                    key={contactObject.email}
-                    email={contactObject.email}
-                    lastMessage={'Hello World'}
-                  />
-                ))}
+                <div className={styles.list}>
+                  {data &&
+                    data?.data
+                      .filter(
+                        contactObject => contactObject.email !== user?.email,
+                      )
+                      .map(contactObject => (
+                        <PreviousChat
+                          contact={contactObject}
+                          key={contactObject.email}
+                          email={contactObject.email}
+                          lastMessage={'Hello World'}
+                        />
+                      ))}
+                </div>
               </article>
-            )}
-            {person && (
-              <PreviousChat
-                email={person.email}
-                lastMessage={'Hello World'}
-                onRemovePerson={onRemovePerson}
-              />
             )}
           </section>
           {contact && <ChatBox />}

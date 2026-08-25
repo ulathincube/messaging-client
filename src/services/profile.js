@@ -19,7 +19,12 @@ async function getProfileStatus(email) {
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/profile/${email}`,
     );
-    return response;
+
+    if (!response.ok) {
+      const { message } = await response.json();
+      throw new Error(message);
+    }
+    return await response.json();
   } catch (error) {
     if (error) throw error;
   }

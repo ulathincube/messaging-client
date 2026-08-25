@@ -1,47 +1,62 @@
 import styles from './ChatBox.module.css';
 import useContact from '../../hooks/useContact';
 import ChatMessage from '../ChatMessage/ChatMessage';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { createMessage } from '../../services/message';
 import { findChats } from '../../services/user';
 import { getProfileStatus } from '../../services/profile';
 import useAuth from '../../hooks/useAuth';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import useStatus from '../../hooks/useStatus';
 
 function ChatBox() {
   const [contact] = useContact();
   const [message, setMessage] = useState('');
   const [user] = useAuth();
-  const [chats, setChats] = useState([]);
-  const [userStatus, setUserStatus] = useState(null);
+  const queryClient = useQueryClient();
+  const { onChangeStatus } = useStatus();
 
-  useEffect(() => {
-    async function runEffect() {
-      try {
-        console.log(contact.email);
-        const response = await findChats(user.email, contact.email);
-        const { data, error, message: message_ } = await response.json();
-
-        const res = await getProfileStatus(contact.email);
-        const {
-          data: data_,
-          error: error_,
-          message: _message,
-        } = await res.json();
-
-        console.log({ data, error, message_ });
-        console.log({ data_, error_, _message });
-
-        if (!data) setChats([]);
-        setChats([...data]);
-        if (!data_) setUserStatus('Available');
-        setUserStatus(data_.status);
-      } catch (error) {
-        console.log(error);
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['findChats'],
+    queryFn: () => {
+      if (isLoading) {
+        onChangeStatus({ type: 'loading', message: '' });
       }
-    }
+      if (error) {
+        onChangeStatus({ type: 'error', message: error.message });
+      }
+      return findChats(user.email, contact.email);
+    },
+  });
 
-    runEffect();
-  }, [user.email, contact.email]);
+  const mutation = useMutation({
+    mutationFn: ({ message, senderEmail, contactEmail }) =>
+      createMessage(message, senderEmail, contactEmail),
+    onSuccess: data => {
+      console.log({ data });
+      queryClient.invalidateQueries({ queryKey: ['findChats'] });
+    },
+    onError: error => {
+      console.error(error);
+    },
+  });
+
+  const {
+    data: _data,
+    error: _error,
+    isLoading: _isLoading,
+  } = useQuery({
+    queryKey: ['getProfileStatus', contact.email],
+    queryFn: () => {
+      if (_isLoading) {
+        onChangeStatus({ type: 'loading', message: '' });
+      }
+      if (error) {
+        onChangeStatus({ type: 'error', message: _error.message });
+      }
+      return getProfileStatus(contact.email);
+    },
+  });
 
   function onMessageChange({ target: { value } }) {
     setMessage(value);
@@ -50,16 +65,22 @@ function ChatBox() {
   async function onSendMessage(event) {
     event.preventDefault();
 
-    try {
-      const response = await createMessage(message, user.email, contact.email);
+    mutation.mutate({
+      message,
+      senderEmail: user.email,
+      contactEmail: contact.email,
+    });
 
-      const { data, error, message: message_ } = await response.json();
-      console.log({ data, error, message_ });
-      setChats(currentChats => [...currentChats, data]);
-      setMessage('');
-    } catch (error) {
-      if (error) throw error;
-    }
+    // try {
+    //   const response = await createMessage(message, user.email, contact.email);
+
+    //   const { data, error, message: message_ } = await response.json();
+    //   console.log({ data, error, message_ });
+    //   setChats(currentChats => [...currentChats, data]);
+    //   setMessage('');
+    // } catch (error) {
+    //   if (error) throw error;
+    // }
   }
 
   const firstLetter = contact.email.charAt(0).toUpperCase();
@@ -74,24 +95,19 @@ function ChatBox() {
         </div>
         <div className={styles.details}>
           <span className={styles.name}>{contact.email}</span>
-          <span className={styles.status}>{userStatus}</span>
+          <span className={styles.status}>
+            {(_data && _data?.data?.status) || 'Online'}
+          </span>
         </div>
       </div>
       <article className={styles.chats}>
-        {chats.length > 0 &&
-          chats.map(chatObject => (
+        {data &&
+          data.data.map(chatObject => (
             <ChatMessage key={chatObject.message_id} chatMessage={chatObject} />
           ))}
       </article>
       <form className={styles.chat}>
         <div className={styles.group}>
-          {/* <input
-            value={message}
-            onChange={onMessageChange}
-            type='text'
-            className={styles.message}
-            placeholder='Say Hi!'
-          /> */}
           <textarea
             value={message}
             onChange={onMessageChange}

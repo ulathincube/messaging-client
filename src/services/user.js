@@ -10,7 +10,13 @@ async function createUser(email, password) {
         body: JSON.stringify({ email, password }),
       },
     );
-    return response;
+
+    if (!response.ok) {
+      const { message } = await response.json();
+      throw new Error(message);
+    }
+
+    return await response.json();
   } catch (error) {
     if (error) throw error;
   }
@@ -63,7 +69,12 @@ async function findChats(sender, receiver) {
       `${import.meta.env.VITE_API_URL}/users/chats?sender=${sender}&receiver=${receiver}`,
     );
 
-    return response;
+    if (!response.ok) {
+      const { message } = await response.json();
+      throw new Error(message);
+    }
+
+    return await response.json();
   } catch (error) {
     if (error) throw error;
   }
@@ -81,12 +92,12 @@ async function findContacts(email) {
 }
 
 async function findAllUsers() {
-  try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/users`);
-    return response;
-  } catch (error) {
-    if (error) throw error;
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/users`);
+  if (!response.ok) {
+    const { message } = await response.json();
+    throw new Error(message);
   }
+  return await response.json();
 }
 
 export {
