@@ -6,46 +6,36 @@ import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router';
 import Spacer from '../Spacer';
 import useStatus from '../../hooks/useStatus';
+import { useMutation } from '@tanstack/react-query';
 
 function Login({ onToggle, registeredEmail = '' }) {
   const [email, setEmail] = useState(registeredEmail);
   const [password, setPassword] = useState('');
-  const { status, onChangeStatus, message, onChangeMessage } = useStatus();
-  // idle, loading, error, success
-  const [user, onChangeUser] = useAuth();
+  const { onChangeStatus } = useStatus();
+
+  const [, onChangeUser] = useAuth();
   const navigate = useNavigate();
+
+  const mutation = useMutation({
+    mutationFn: ({ email, password }) => loginUser(email, password),
+    retry: 3,
+    onSuccess: data => {
+      onChangeUser(data.data);
+      onChangeStatus({ type: 'success', message: data.message });
+      navigate('/');
+    },
+    onError: error => {
+      onChangeUser(null);
+      onChangeStatus({ type: 'error', message: error.message });
+    },
+  });
+  // idle, loading, error, success
 
   async function loginUserHandler(event) {
     event.preventDefault();
-    if (!email || !password) {
-      onChangeStatus('error');
-      onChangeMessage('Invalid login details');
-      return;
-    }
-    onChangeStatus('loading');
-    try {
-      const response = await loginUser(email, password);
-
-      if (!response.ok) {
-        onChangeStatus('error');
-        onChangeMessage(response.statusText);
-        return;
-      }
-      const { data, error, message } = await response.json();
-
-      if (!error) {
-        onChangeStatus('success');
-        onChangeMessage(message);
-        onChangeUser(data);
-        navigate('/');
-      } else {
-        onChangeStatus('error');
-        onChangeMessage(message);
-      }
-    } catch (error) {
-      onChangeStatus('error');
-      onChangeMessage('Unable to login at this time!');
-    }
+    onChangeStatus({ type: 'loading', message: '' });
+    if (!email || !password) return;
+    mutation.mutate({ email, password });
   }
 
   function onEmailChange({ target: { value } }) {

@@ -16,12 +16,15 @@ import { wakeServerUp } from './services';
 function App() {
   const [contact, setContact] = useState(null);
   const [user, setUser] = useState(null);
-  const [status, setStatus] = useState('idle');
-  const [message, setMessage] = useState(null);
+  const [status, setStatus] = useState({ type: 'idle', message: '' });
 
   useEffect(() => {
     async function runEffect() {
-      await wakeServerUp();
+      try {
+        await wakeServerUp();
+      } catch (error) {
+        onChangeStatus({ type: 'error', message: error.message });
+      }
     }
 
     runEffect();
@@ -42,13 +45,6 @@ function App() {
     }, 5000);
   }
 
-  function onChangeMessage(newMessage) {
-    setMessage(newMessage);
-    setTimeout(() => {
-      setMessage(null);
-    }, 5000);
-  }
-
   const userValue = useMemo(() => {
     return [user, onChangeUser];
   }, [user]);
@@ -58,8 +54,8 @@ function App() {
   }, [contact]);
 
   const statusValue = useMemo(() => {
-    return { status, onChangeStatus, message, onChangeMessage };
-  }, [status, message]);
+    return { status, onChangeStatus };
+  }, [status]);
 
   return (
     <AuthContext value={userValue}>
@@ -68,12 +64,12 @@ function App() {
           <Loader />
           <Toast />
           <Routes>
-            <Route path='auth' element={<Authenticate />}></Route>
+            <Route path='auth' element={<Authenticate />} />
             <Route element={<Protected />}>
               <Route path='/' element={<Home />} />
               <Route path='users' element={<Users />} />
               <Route path='profile' element={<Profile />} />
-              <Route path='messages' element={<Messages />}></Route>
+              <Route path='messages' element={<Messages />} />
             </Route>
           </Routes>
         </StatusContext>

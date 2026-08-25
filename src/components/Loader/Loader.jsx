@@ -3,8 +3,11 @@ import useStatus from '../../hooks/useStatus';
 
 function Loader() {
   const { status } = useStatus();
+  if (!status) return;
 
-  if (status === 'loading') {
+  const { type } = status;
+
+  if (type === 'loading') {
     return (
       <div className={styles.wrapper}>
         <span className={styles.loader}>

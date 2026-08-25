@@ -1,8 +1,5 @@
 export async function wakeServerUp() {
-  try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/start`);
-    return response;
-  } catch (error) {
-    if (error) throw error;
-  }
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/start`);
+  if (!response.ok) throw new Error('Something went wrong: Server unreachable');
+  return await response.json();
 }

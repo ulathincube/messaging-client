@@ -1,10 +1,12 @@
 import styles from './Main.module.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import ChatBox from '../ChatBox';
 import useContact from '../../hooks/useContact';
 import PreviousChat from '../PreviousChat';
 import { findUser, findAllUsers } from '../../services/user';
 import useAuth from '../../hooks/useAuth';
+import { useQuery } from '@tanstack/react-query';
+import useStatus from '../../hooks/useStatus';
 
 function Main() {
   const [contact] = useContact();
@@ -14,29 +16,46 @@ function Main() {
   const [person, setPerson] = useState(null);
   const [user] = useAuth();
 
-  useEffect(() => {
-    if (!user) return;
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['findAllUsers'],
+    queryFn: findAllUsers,
+  });
 
-    async function runEffect() {
-      const { email } = user;
-      try {
-        const response = await findAllUsers();
-        const { data, error, message } = await response.json();
-        console.log({ data, error, message });
-        const filteredContacts = data.filter(
-          personObject => personObject.email !== email,
-        );
-        setContacts(filteredContacts);
-        setPerson(null);
-      } catch (error) {
-        console.log(error);
-      }
-    }
+  const { onChangeStatus } = useStatus();
 
-    runEffect();
-  }, [user]);
+  const {
+    data: _data,
+    error: _error,
+    isLoading: _isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ['findUser'],
+    queryFn: () => findUser(email),
+    enabled: false,
+  });
 
-  if (!user) return;
+  // handle state
+
+  // useEffect(() => {
+  //   if (!user) return;
+
+  //   async function runEffect() {
+  //     try {
+  //       const response = await findAllUsers();
+  //       const { data, error, message } = await response.json();
+  //       console.log({ data, error, message });
+  //       const filteredContacts = data.filter(
+  //         personObject => personObject.email !== email,
+  //       );
+  //       setContacts(filteredContacts);
+  //       setPerson(null);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+
+  //   runEffect();
+  // }, [user]);
 
   // function onToggleCreateChat() {
   //   setCreateChat(!createChat);
@@ -53,19 +72,16 @@ function Main() {
   async function searchUserHandler(event) {
     event.preventDefault();
 
+    onChangeStatus({ type: 'loading', message: '' });
+
     try {
-      const response = await findUser(email);
-      const { data, error, message } = await response.json();
-      if (!data) return;
-      console.log({ data, error, message });
-      setPerson(data);
+      refetch();
+      setPerson(_data);
       setContacts([]);
     } catch (error) {
-      console.log(error);
+      onChangeStatus({ type: 'error', message: error.message });
     }
   }
-
-  console.log({ contacts });
 
   return (
     <main className={styles.main}>
@@ -93,6 +109,7 @@ function Main() {
             {contacts.length > 0 &&
               contacts.map(contactObject => (
                 <PreviousChat
+                  contact={contactObject}
                   key={contactObject.email}
                   email={contactObject.email}
                   lastMessage={'Hello World'}
@@ -100,33 +117,6 @@ function Main() {
               ))}
           </ul>
         </article>
-        {/* {createChat ? (
-          <div className={styles.new}>
-            <SearchBox onCreateChat={onToggleCreateChat} />
-          </div>
-        ) : (
-          <div className={styles.new}>
-            <button className={styles.create} onClick={onToggleCreateChat}>
-              <span className={styles.text}>New Chat</span>
-              <span className={styles.icon}>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='24'
-                  height='24'
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  stroke='currentColor'
-                  stroke-width='2'
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  class='feather feather-message-circle'
-                >
-                  <path d='M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z'></path>
-                </svg>
-              </span>
-            </button>
-          </div>
-        )} */}
       </aside>
       <section className={styles.focus}>
         <div className={styles.wrapper}>
@@ -187,20 +177,6 @@ function Main() {
           </section>
           {contact && <ChatBox />}
         </div>
-        <article className={styles.bottom}>
-          <>
-            {/* {!createChat && !contact && (
-              <button className={styles.chat} onClick={onToggleCreateChat}>
-                New Chat
-              </button>
-            )} */}
-            {/* {!contact && (
-              <div className={styles.flex}>
-                <MobileSearchBox onCreateChat={onToggleCreateChat} />
-              </div>
-            )} */}
-          </>
-        </article>
       </section>
     </main>
   );

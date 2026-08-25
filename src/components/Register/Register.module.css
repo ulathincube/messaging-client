@@ -97,3 +97,7 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+.submit:hover {
+  background-color: var(--contrast-color);
+}

@@ -6,37 +6,35 @@ import { Link } from 'react-router';
 import Spacer from '../Spacer';
 import useStatus from '../../hooks/useStatus';
 import { useNavigate } from 'react-router';
+import { useQuery } from '@tanstack/react-query';
 
 function Register({ onToggle, onRegister }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { message, onChangeMessage, status, onChangeStatus } = useStatus();
+  const { onChangeStatus } = useStatus();
+
+  const { data, error, isLoading, refetch } = useQuery({
+    queryKey: ['register'],
+    queryFn: () => createUser(email, password),
+  });
 
   const navigate = useNavigate();
 
   async function registerUserHandler(event) {
     event.preventDefault();
     if (!email || !password) return;
+    isLoading && onChangeStatus('loading');
+    refetch();
 
-    onChangeStatus('loading');
     try {
-      const response = await createUser(email, password);
+      if (error)
+        return onChangeStatus({ type: 'error', message: error.message });
 
-      if (!response.ok) throw new Error('An error occurred');
-      const { data, error, message } = await response.json();
-      if (!data && error) {
-        onChangeStatus('error');
-        onChangeMessage(message);
-        return;
-      }
-      onChangeStatus('success');
-      onChangeMessage(message);
+      onChangeStatus({ type: 'success', message: data.message });
       onRegister(email);
       navigate('/login');
     } catch (error) {
-      onChangeStatus('error');
-      onChangeMessage(error.message);
-      console.log(error);
+      onChangeStatus({ type: 'error', message: error.message });
     }
   }
 
