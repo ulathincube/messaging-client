@@ -8,7 +8,6 @@ function Protected() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(user);
     if (!user) return navigate('/auth');
   }, [user, navigate]);
 

@@ -5,7 +5,6 @@
   background-color: var(--main-color-background);
   color: var(--main-color-foreground);
   align-items: baseline;
-  border-bottom: var(--lighter-border);
 }
 
 .logo {

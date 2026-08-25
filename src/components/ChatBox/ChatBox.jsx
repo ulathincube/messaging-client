@@ -37,7 +37,7 @@ function ChatBox() {
       queryClient.invalidateQueries({ queryKey: ['findChats'] });
     },
     onError: error => {
-      console.error(error);
+      onChangeStatus({ type: 'error', message: error.message });
     },
   });
 
