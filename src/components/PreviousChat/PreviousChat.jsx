@@ -1,20 +1,15 @@
 import styles from './PreviousChat.module.css';
 import useContact from '../../hooks/useContact';
 
-function PreviousChat({
-  contact,
-  email,
-  lastMessage,
-  onRemovePerson = () => {},
-}) {
+function PreviousChat({ contact, email, lastMessage }) {
   const [currentContact, onChangeContact] = useContact();
 
   const active = currentContact?.email === email ? styles.active : '';
   const firstLetter = email.charAt(0).toUpperCase();
 
   function selectUser() {
-    console.log('contact selected!');
     onChangeContact(contact);
+    // console.log({ currentContact, contact });
   }
 
   return (

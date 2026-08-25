@@ -17,7 +17,7 @@ function ChatBox() {
   const { onChangeStatus } = useStatus();
 
   const { data, error, isLoading } = useQuery({
-    queryKey: ['findChats'],
+    queryKey: ['findChats', contact.email],
     queryFn: () => {
       if (isLoading) {
         onChangeStatus({ type: 'loading', message: '' });
@@ -71,16 +71,7 @@ function ChatBox() {
       contactEmail: contact.email,
     });
 
-    // try {
-    //   const response = await createMessage(message, user.email, contact.email);
-
-    //   const { data, error, message: message_ } = await response.json();
-    //   console.log({ data, error, message_ });
-    //   setChats(currentChats => [...currentChats, data]);
-    //   setMessage('');
-    // } catch (error) {
-    //   if (error) throw error;
-    // }
+    setMessage('');
   }
 
   const firstLetter = contact.email.charAt(0).toUpperCase();

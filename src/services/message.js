@@ -7,7 +7,11 @@ async function createMessage(text, sender, receiver) {
       },
       body: JSON.stringify({ text, sender, receiver }),
     });
-    return response;
+    if (!response.ok) {
+      const { message } = await response.json();
+      throw new Error(message);
+    }
+    return await response.json();
   } catch (error) {
     if (error) throw error;
   }

@@ -33,7 +33,13 @@ async function findUser(email) {
         },
       },
     );
-    return response;
+
+    if (!response.ok) {
+      const { message } = await response.json();
+      throw new Error(message);
+    }
+
+    return await response.json();
   } catch (error) {
     if (error) throw error;
   }
@@ -85,7 +91,13 @@ async function findContacts(email) {
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/users/user/${email}`,
     );
-    return response;
+
+    if (!response.ok) {
+      const { message } = await response.json();
+      throw new Error(message);
+    }
+
+    return await response.json();
   } catch (error) {
     if (error) throw error;
   }

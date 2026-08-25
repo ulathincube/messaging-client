@@ -30,8 +30,6 @@ function Main() {
     },
   });
 
-  console.log({ data });
-
   function onEmailChange(event) {
     const nextValue = event.target.value;
     if (!nextValue) return;
