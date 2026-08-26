@@ -112,6 +112,27 @@ async function findAllUsers() {
   return await response.json();
 }
 
+async function resetPassword({ email, password }) {
+  const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/users/reset/${email}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        password,
+      }),
+    },
+  );
+
+  if (!response.ok) {
+    const { message } = await response.json();
+    throw new Error(message);
+  }
+  return await response.json();
+}
+
 export {
   createUser,
   findUser,
@@ -119,4 +140,5 @@ export {
   findChats,
   findContacts,
   findAllUsers,
+  resetPassword,
 };

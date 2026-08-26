@@ -5,6 +5,7 @@
   inset: 0;
   background-color: var(--black-opaque);
   backdrop-filter: blur(2px);
+  --icon-size: 48px;
 }
 
 .loader {
@@ -17,11 +18,12 @@
 }
 
 .icon {
-  width: 24px;
-  height: 24px;
+  width: var(--icon-size);
+  height: var(--icon-size);
   color: inherit;
   line-height: 0;
-  animation: spin 1500ms infinite linear both;
+  transform-origin: center;
+  animation: spin 2000ms infinite linear both;
 }
 
 @keyframes spin {

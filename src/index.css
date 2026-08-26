@@ -13,8 +13,15 @@
   --backdrop-color-dark: hsl(220deg 50% 10% / 0.75);
   --aside-color: hsl(220deg 30% 15%);
   --main-focus-color: hsl(220deg 35% 20%);
+  --main-focus-color-next: hsl(250deg 45% 30%);
+  --gradient-one: linear-gradient(
+    var(--main-focus-color),
+    var(--main-focus-color-next)
+  );
   --main-color-strong: hsl(220deg 95% 45%);
   --main-color: hsl(220deg 30% 25%);
+  --main-color-next: hsl(250deg 50% 40%);
+  --gradient-two: linear-gradient(var(--main-color), var(--main-color-next));
   --contrast-color: hsl(30deg 100% 40%);
   --main-color-lighter: hsl(220deg 20% 35%);
   --text-color: hsl(220deg 10% 85%);
@@ -59,7 +66,7 @@ body {
   line-height: 1.5;
   /* 5. Improve text rendering */
   -webkit-font-smoothing: antialiased;
-  background-color: var(--main-color);
+  background-image: var(--gradient-two);
   color: var(--text-color);
 }
 

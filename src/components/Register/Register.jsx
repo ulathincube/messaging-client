@@ -43,7 +43,7 @@ function Register({ onToggle, onRegister }) {
     <div className={styles.backdrop}>
       <section className={styles.register}>
         <article>
-          <h2 className={styles.title}>Register</h2>
+          <h2 className={styles.title}>Welcome, Register an account</h2>
         </article>
         <form className={styles.form} onSubmit={registerUserHandler}>
           <div className={styles.group}>
