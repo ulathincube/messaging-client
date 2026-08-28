@@ -4,9 +4,10 @@
 
 .user {
   font-size: var(--font-size-small);
+  font-weight: var(--font-weight-light);
   color: var(--text-color);
   display: flex;
-  gap: 15px;
+  gap: 20px;
   align-items: center;
 }
 
@@ -16,15 +17,16 @@
 }
 
 .avatar {
-  width: 60px;
-  height: 60px;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
   border-radius: 50%;
-  background-color: var(--black);
+  background-color: var(--gray);
+  /* background: var(--gradient-one); */
   color: var(--main-color-foreground);
   display: flex;
+  font-size: var(--font-size-small);
   justify-content: center;
   align-items: center;
-  border: 1px solid var(--main-color-foreground);
 }
 
 .hint {
@@ -38,6 +40,7 @@
   border: none;
   cursor: pointer;
   text-align: left;
+  width: 100%;
 }
 
 .active {

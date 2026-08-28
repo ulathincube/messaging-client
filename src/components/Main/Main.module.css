@@ -104,7 +104,7 @@
   flex: 1;
   background-color: var(--main-color-lighter);
   border: var(--light-border);
-  border-radius: var(--border-radius-left-side);
+  border-radius: var(--border-radius);
   color: var(--text-color);
 }
 
@@ -124,6 +124,7 @@
 
 .wrapper {
   flex: 1;
+  background: var(--gradient-two);
 }
 
 .bottom {
@@ -135,6 +136,11 @@
 .display,
 .chat {
   display: none;
+}
+
+.text {
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-medium);
 }
 
 @media screen and (max-width: 50rem) {

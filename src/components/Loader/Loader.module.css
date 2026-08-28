@@ -5,7 +5,7 @@
   inset: 0;
   background-color: var(--black-opaque);
   backdrop-filter: blur(2px);
-  --icon-size: 48px;
+  --icon-size: 24px;
 }
 
 .loader {

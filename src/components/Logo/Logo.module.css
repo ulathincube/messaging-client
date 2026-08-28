@@ -1,0 +1,26 @@
+.wrapper {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.logo {
+  color: var(--text-color);
+  font-weight: var(--font-weight-superbold);
+}
+
+.small {
+  font-size: var(--font-size-medium);
+}
+
+.medium {
+  font-size: var(--font-size-large);
+}
+
+.large {
+  font-size: var(--font-size-large);
+}
+
+.superlarge {
+  font-size: var(--font-size-superlarge);
+}

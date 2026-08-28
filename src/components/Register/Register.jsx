@@ -6,6 +6,7 @@ import Spacer from '../Spacer';
 import useStatus from '../../hooks/useStatus';
 import { useNavigate } from 'react-router';
 import { useMutation } from '@tanstack/react-query';
+import Logo from '../Logo';
 
 function Register({ onToggle, onRegister }) {
   const [email, setEmail] = useState('');
@@ -42,9 +43,12 @@ function Register({ onToggle, onRegister }) {
   return createPortal(
     <div className={styles.backdrop}>
       <section className={styles.register}>
-        <article>
-          <h2 className={styles.title}>Welcome, Register an account</h2>
-        </article>
+        <div className={styles.container}>
+          <Logo />
+          <article className={styles.parent}>
+            <h2 className={styles.title}>Welcome, Register an account</h2>
+          </article>
+        </div>
         <form className={styles.form} onSubmit={registerUserHandler}>
           <div className={styles.group}>
             <label className={styles.label} htmlFor='email'>

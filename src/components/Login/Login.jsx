@@ -8,6 +8,7 @@ import Spacer from '../Spacer';
 import useStatus from '../../hooks/useStatus';
 import { useMutation } from '@tanstack/react-query';
 import ResetPassword from '../ResetPassword';
+import Logo from '../Logo';
 
 function Login({ onToggle, registeredEmail = '' }) {
   const [email, setEmail] = useState(registeredEmail);
@@ -20,7 +21,6 @@ function Login({ onToggle, registeredEmail = '' }) {
 
   const mutation = useMutation({
     mutationFn: ({ email, password }) => loginUser(email, password),
-    retry: 3,
     onSuccess: data => {
       onChangeUser(data.data);
       onChangeStatus({ type: 'success', message: data.message });
@@ -52,11 +52,14 @@ function Login({ onToggle, registeredEmail = '' }) {
     <div className={styles.backdrop}>
       {!reset && (
         <section className={styles.login}>
-          <article>
-            <h2 className={styles.title}>
-              Welcome back! Login into your account
-            </h2>
-          </article>
+          <div className={styles.container}>
+            <Logo />
+            <article className={styles.parent}>
+              <h2 className={styles.title}>
+                Welcome back! Login into your account
+              </h2>
+            </article>
+          </div>
           <form className={styles.form} onSubmit={loginUserHandler}>
             <div className={styles.group}>
               <label className={styles.label} htmlFor='email'>
@@ -108,12 +111,17 @@ function Login({ onToggle, registeredEmail = '' }) {
                   </span>
                 </button>
               </div>
+              <Spacer marginTop={10}>
+                <button
+                  onClick={() => setReset(true)}
+                  className={styles.forgot}
+                >
+                  Forgot Password? Reset here
+                </button>
+              </Spacer>
             </Spacer>
           </form>
           <div className={styles.aside}>
-            <button onClick={() => setReset(true)} className={styles.action}>
-              Forgot Password? Reset here
-            </button>
             <button onClick={onToggle} className={styles.action}>
               Don't have an account? Register here
             </button>

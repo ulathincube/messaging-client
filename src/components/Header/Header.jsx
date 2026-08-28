@@ -2,6 +2,7 @@ import styles from './Header.module.css';
 import { Link, useNavigate } from 'react-router';
 import Profile from '../Profile';
 import useContact from '../../hooks/useContact';
+import Logo from '../Logo';
 
 function Header() {
   const [contact, onChangeContact] = useContact();
@@ -15,7 +16,7 @@ function Header() {
     <header className={styles.header}>
       <div className={styles.logo}>
         <button onClick={onClickReset} className={styles.reset}>
-          Messaging
+          <Logo size='large' />
         </button>
       </div>
       <nav className={styles.nav}>

@@ -22,11 +22,21 @@
   gap: 50px;
 }
 
+.parent {
+  text-align: center;
+}
+
 .title {
-  display: inline;
-  font-size: var(--font-size-large);
-  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-medium);
+  font-weight: var(--font-weight-normal);
   color: var(--text-color);
+  display: inline;
+}
+
+.intro {
+  font-size: var(--font-size-medium);
+  color: var(--text-color);
+  text-align: center;
 }
 
 .form {
@@ -72,31 +82,42 @@
   color: var(--text-color);
   border: none;
   padding: 16px;
-  font-size: 1.2rem;
+  font-size: var(--font-size-medium);
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 10px;
+  align-items: center;
+  justify-content: center;
   transition: background-color 300ms;
 }
 
 .submit svg {
   line-height: 0;
+  width: 24px;
+  height: 24px;
 }
 
 .aside {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
   justify-content: center;
   color: var(--text-color);
   padding: 10px 0;
 }
 
-.action {
+.action,
+.forgot {
   color: inherit;
   border: none;
   padding: 0;
   background-color: transparent;
   cursor: pointer;
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-small);
+}
+
+.forgot {
+  color: var(--text-color);
 }
 
 .submit:hover {

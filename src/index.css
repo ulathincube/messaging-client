@@ -8,6 +8,7 @@
   --white: hsl(220deg 20% 95%);
   --supporting-color-darker: hsl(220deg 100% 85%);
 
+  --avatar-size: 48px;
   --gray: hsl(220deg 30% 30%);
   --backdrop-color: hsl(220deg 90% 90% / 0.9);
   --backdrop-color-dark: hsl(220deg 50% 10% / 0.75);
@@ -22,7 +23,7 @@
   --main-color: hsl(220deg 30% 25%);
   --main-color-next: hsl(250deg 50% 40%);
   --gradient-two: linear-gradient(var(--main-color), var(--main-color-next));
-  --contrast-color: hsl(30deg 100% 40%);
+  --contrast-color: hsl(30deg 100% 50%);
   --main-color-lighter: hsl(220deg 20% 35%);
   --text-color: hsl(220deg 10% 85%);
   --text-color-darker: hsl(220deg 20% 75%);
@@ -33,13 +34,17 @@
   --lighter-border: 2px solid var(--main-color-lighter);
   --font-size-small: 1rem;
   --font-size-medium: 1.2rem;
-  --font-size-large: 1.5rem;
+  --font-size-large: 2.5rem;
   --black: hsl(220deg 35% 20%);
   --black-opaque: hsl(220deg 35% 20% / 0.85);
   --border-radius: 4px;
   --border-radius-left-side: var(--border-radius) 0 0 var(--border-radius);
   --border-radius-right-side: 0 var(--border-radius) var(--border-radius) 0;
   --border-radius-circle: 50%;
+  --font-weight-light: 400;
+  --font-size-smaller: 0.9rem;
+  --font-weight-superbold: 800;
+  --font-size-superlarge: 5rem;
 }
 
 /* 1. Use a more-intuitive box-sizing model */
@@ -144,4 +149,10 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+@media screen and (max-width: 50rem) {
+  body {
+    font-weight: var(--font-weight-light);
+  }
 }

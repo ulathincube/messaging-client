@@ -22,9 +22,13 @@
   gap: 50px;
 }
 
+.parent {
+  text-align: center;
+}
+
 .title {
-  font-size: var(--font-size-large);
-  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-medium);
+  font-weight: var(--font-weight-normal);
   color: var(--text-color);
   display: inline;
 }
@@ -101,12 +105,19 @@
   padding: 10px 0;
 }
 
-.action {
+.action,
+.forgot {
   color: inherit;
   border: none;
   padding: 0;
   background-color: transparent;
   cursor: pointer;
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-small);
+}
+
+.forgot {
+  color: var(--text-color);
 }
 
 .submit:hover {

@@ -4,6 +4,7 @@ import { resetPassword } from '../../services/user';
 import { useMutation } from '@tanstack/react-query';
 import useStatus from '../../hooks/useStatus';
 import { useNavigate } from 'react-router';
+import Logo from '../Logo';
 
 function ResetPassword({ email = '', onToggleReset }) {
   const instanceId = useId();
@@ -37,9 +38,12 @@ function ResetPassword({ email = '', onToggleReset }) {
 
   return (
     <section className={styles.reset}>
-      <article>
-        <h2 className={styles.title}>Welcome back! Reset your password</h2>
-      </article>
+      <div className={styles.container}>
+        <Logo />
+        <article className={styles.parent}>
+          <h2 className={styles.title}>Welcome back! Reset your password</h2>
+        </article>
+      </div>
       <form className={styles.form} onSubmit={onSubmitReset}>
         <div className={styles.group}>
           <label className={styles.label} htmlFor={inputId}>

@@ -8,32 +8,36 @@
 .chats {
   padding: 10px;
   padding-top: 20px;
+  padding-bottom: 100px;
   display: flex;
   gap: 10px;
   flex-direction: column;
 }
 
 .contact {
-  background-color: var(--black);
+  background-color: var(--backdrop-color-dark);
   color: var(--main-color-foreground);
   padding: 15px;
   display: flex;
-  gap: 10px;
+  gap: 20px;
 }
 
 .details {
   display: flex;
-  gap: 5px;
   flex-direction: column;
 }
 
+.name {
+  font-size: var(--font-size-small);
+}
+
 .avatar {
-  width: 50px;
-  height: 50px;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
   border-radius: var(--border-radius-circle);
   color: var(--text-color);
   background-color: var(--main-color);
-  border: var(--light-border);
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,6 +45,14 @@
 
 .status {
   font-size: 0.8rem;
+  color: var(--text-color-darker);
+  font-style: italic;
+}
+
+.icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  color: inherit;
 }
 
 .chat {
@@ -48,6 +60,9 @@
   margin-top: auto;
   align-items: stretch;
   padding: 10px;
+  position: fixed;
+  inset: 0;
+  height: fit-content;
 }
 
 .group {
@@ -56,7 +71,7 @@
 }
 
 .group:nth-child(1) {
-  flex: 3;
+  flex: 5;
 }
 
 .message,
@@ -83,9 +98,11 @@
 .message {
   width: 100%;
   resize: none;
+  line-height: 1.2;
+  padding: 5px;
+  color: var(--text-color);
   background-color: var(--main-color-lighter);
   border-radius: var(--border-radius-left-side);
-  color: var(--text-color);
 }
 
 @media screen and (max-width: 50rem) {

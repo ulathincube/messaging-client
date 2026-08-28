@@ -3,13 +3,13 @@
   border-radius: var(--border-radius);
   color: var(--text-color);
   display: flex;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-normal);
   font-size: var(--font-size-small);
 
   position: fixed;
   top: 10%;
   left: 50%;
-  width: fit-content;
+  width: max-content;
   box-shadow: var(--shadow);
   transform: translate(-50%, -50%);
   animation: fadeIn 1000ms ease-out forwards;
@@ -21,6 +21,7 @@
 
 .error {
   background-color: var(--contrast-color);
+  color: var(--black);
 }
 
 @keyframes fadeIn {
