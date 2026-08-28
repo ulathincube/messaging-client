@@ -63,6 +63,7 @@
   position: fixed;
   inset: 0;
   height: fit-content;
+  gap: 10px;
 }
 
 .group {
@@ -78,13 +79,14 @@
 .submit {
   padding: 10px;
   border: none;
+  border-radius: var(--border-radius);
 }
 
 .submit {
   background-color: var(--main-color-strong);
   color: var(--text-color);
   padding: 0 60px;
-  border-radius: var(--border-radius-right-side);
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,10 +101,14 @@
   width: 100%;
   resize: none;
   line-height: 1.2;
-  padding: 5px;
+  padding: 10px;
   color: var(--text-color);
-  background-color: var(--main-color-lighter);
-  border-radius: var(--border-radius-left-side);
+  background-color: var(--gray);
+  box-shadow: var(--shadow-inset);
+}
+
+.message:focus {
+  outline: none;
 }
 
 @media screen and (max-width: 50rem) {

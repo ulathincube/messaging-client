@@ -116,7 +116,6 @@ function ChatBox() {
             value={message}
             onChange={onMessageChange}
             className={styles.message}
-            placeholder='Say Hello!'
           ></textarea>
         </div>
         <div className={styles.group}>
