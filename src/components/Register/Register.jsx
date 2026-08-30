@@ -17,8 +17,8 @@ function Register({ onToggle, onRegister }) {
 
   const mutation = useMutation({
     mutationFn: ({ email, password }) => createUser(email, password),
-    onSuccess: data => {
-      onChangeStatus({ type: 'success', message: data.data.message });
+    onSuccess: () => {
+      onChangeStatus({ type: 'success', message: 'User created!' });
       onRegister(email);
       navigate('/login');
     },

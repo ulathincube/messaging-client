@@ -36,8 +36,7 @@ function ChatBox() {
   const mutation = useMutation({
     mutationFn: ({ message, senderEmail, contactEmail }) =>
       createMessage(message, senderEmail, contactEmail),
-    onSuccess: data => {
-      console.log({ data, socket });
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['findChats'] });
     },
     onError: error => {

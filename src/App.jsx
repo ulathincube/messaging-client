@@ -34,19 +34,19 @@ function App() {
     runEffect();
   }, []);
 
-  useEffect(() => {
-    function runEffect() {
-      if (webSocket) {
-        const socket = io('ws://localhost:5000');
-        onChangeSocket(socket);
-        console.log({ socket });
-      }
-    }
+  // useEffect(() => {
+  //   function runEffect() {
+  //     if (webSocket) {
+  //       const socket = io('ws://localhost:5000');
+  //       onChangeSocket(socket);
+  //       console.log({ socket });
+  //     }
+  //   }
 
-    runEffect();
+  //   runEffect();
 
-    return () => {};
-  }, [webSocket]);
+  //   return () => {};
+  // }, [webSocket]);
 
   function onChangeContact(newContact) {
     setContact(newContact);
