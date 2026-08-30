@@ -57,6 +57,28 @@
   gap: 5px;
 }
 
+.group.reveal {
+  position: relative;
+}
+
+.show {
+  position: absolute;
+  top: 68%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  border: none;
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+.show svg {
+  line-height: 0;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  color: var(--text-color);
+}
+
 .field,
 .submit {
   border-radius: 0;

@@ -12,7 +12,7 @@ function toggleVisibility(visibility = true) {
   }
 }
 
-function Authenticate() {
+function Authenticate({ onDisableWebSocket, webSocket, onEnableWebSocket }) {
   // login => app // register => login
   const [register, setRegister] = useState(false);
   const [registeredEmail, setRegisteredEmail] = useState('');
@@ -33,7 +33,12 @@ function Authenticate() {
   return register ? (
     <Register onRegister={onRegister} onToggle={toggleAuthentication} />
   ) : (
-    <Login registeredEmail={registeredEmail} onToggle={toggleAuthentication} />
+    <Login
+      webSocket={webSocket}
+      onEnableWebSocket={onEnableWebSocket}
+      registeredEmail={registeredEmail}
+      onToggle={toggleAuthentication}
+    />
   );
 }
 

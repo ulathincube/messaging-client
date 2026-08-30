@@ -8,6 +8,7 @@ import { getProfileStatus } from '../../services/profile';
 import useAuth from '../../hooks/useAuth';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useStatus from '../../hooks/useStatus';
+import useSocket from '../../hooks/useSocket';
 
 function ChatBox() {
   const [contact] = useContact();
@@ -15,6 +16,7 @@ function ChatBox() {
   const [user] = useAuth();
   const queryClient = useQueryClient();
   const { onChangeStatus } = useStatus();
+  const { socket, onChangeSocket } = useSocket();
 
   const { data, error, isLoading } = useQuery({
     queryKey: ['findChats', contact.email],
@@ -27,13 +29,15 @@ function ChatBox() {
       }
       return findChats(user.email, contact.email);
     },
+    refetchInterval: 5000,
   });
+  //  RETHINK SOCKETS
 
   const mutation = useMutation({
     mutationFn: ({ message, senderEmail, contactEmail }) =>
       createMessage(message, senderEmail, contactEmail),
     onSuccess: data => {
-      console.log({ data });
+      console.log({ data, socket });
       queryClient.invalidateQueries({ queryKey: ['findChats'] });
     },
     onError: error => {

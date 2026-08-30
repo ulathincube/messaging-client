@@ -3,6 +3,7 @@
   flex-direction: column;
   min-height: 100%;
   background: var(--gradient-one);
+  position: relative;
 }
 
 .chats {
@@ -60,10 +61,12 @@
   margin-top: auto;
   align-items: stretch;
   padding: 10px;
-  position: fixed;
+  position: sticky;
   inset: 0;
+  background: var(--gradient-one);
   height: fit-content;
   gap: 10px;
+  width: 100%;
 }
 
 .group {
@@ -85,8 +88,7 @@
 .submit {
   background-color: var(--main-color-strong);
   color: var(--text-color);
-  padding: 0 60px;
-
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -114,6 +116,10 @@
 @media screen and (max-width: 50rem) {
   .submit {
     flex: 1;
+  }
+
+  .chat {
+    inset: 0;
   }
 
   .submit {
