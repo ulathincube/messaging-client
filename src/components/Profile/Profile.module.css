@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   gap: 10px;
-  align-items: baseline;
+  align-items: center;
 }
 
 .avatar {
@@ -13,6 +13,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.user {
+  font-size: var(--font-size-smaller);
 }
 
 @media screen and (max-width: 37.5rem) {

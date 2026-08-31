@@ -9,6 +9,7 @@ import useStatus from '../../hooks/useStatus';
 import { useMutation } from '@tanstack/react-query';
 import ResetPassword from '../ResetPassword';
 import Logo from '../Logo';
+import { motion } from 'motion/react';
 
 function Login({
   onToggle,
@@ -60,7 +61,11 @@ function Login({
   }
 
   return createPortal(
-    <div className={styles.backdrop}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className={styles.backdrop}
+    >
       {!reset && (
         <section className={styles.login}>
           <div className={styles.container}>
@@ -180,7 +185,7 @@ function Login({
       {reset && (
         <ResetPassword email={email} onToggleReset={() => setReset(false)} />
       )}
-    </div>,
+    </motion.div>,
     document.getElementById('auth'),
   );
 }

@@ -7,6 +7,7 @@ import { findAllUsers } from '../../services/user';
 import useAuth from '../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import useStatus from '../../hooks/useStatus';
+import { motion } from 'motion/react';
 
 function Main() {
   const [contact] = useContact();
@@ -41,7 +42,11 @@ function Main() {
   }
 
   return (
-    <main className={styles.main}>
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className={styles.main}
+    >
       <aside className={styles.sidebar}>
         <article className={styles.chats}>
           <h2 className={styles.title}>
@@ -135,7 +140,7 @@ function Main() {
           {contact && <ChatBox />}
         </div>
       </section>
-    </main>
+    </motion.main>
   );
 }
 

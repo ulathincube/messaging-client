@@ -7,6 +7,7 @@ import useStatus from '../../hooks/useStatus';
 import { useNavigate } from 'react-router';
 import { useMutation } from '@tanstack/react-query';
 import Logo from '../Logo';
+import { motion } from 'motion/react';
 
 function Register({ onToggle, onRegister }) {
   const [email, setEmail] = useState('');
@@ -46,7 +47,11 @@ function Register({ onToggle, onRegister }) {
   }
 
   return createPortal(
-    <div className={styles.backdrop}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className={styles.backdrop}
+    >
       <section className={styles.register}>
         <div className={styles.container}>
           <Logo />
@@ -152,7 +157,7 @@ function Register({ onToggle, onRegister }) {
           </button>
         </div>
       </section>
-    </div>,
+    </motion.div>,
     document.getElementById('auth'),
   );
 }
