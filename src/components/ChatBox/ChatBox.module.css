@@ -20,6 +20,8 @@
   padding: 15px;
   display: flex;
   gap: 20px;
+  position: sticky;
+  top: 0;
 }
 
 .details {
