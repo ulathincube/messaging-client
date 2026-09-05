@@ -49,7 +49,7 @@
 }
 
 @font-face {
-  font-family: 'Reddit Sans', Helvetica, Arial, sans-serif;
+  font-family: 'Reddit Sans';
   src: url(/fonts/reddit-sans-regular.woff2);
   font-weight: 200 / 900;
   font-style: normal;
@@ -148,7 +148,7 @@ body {
 }
 
 body {
-  font-family: 'Reddit Sans', sans-serif;
+  font-family: 'Reddit Sans', Helvetica, Arial, sans-serif;
   font-weight: var(--font-weight-normal);
   color: var(--black);
   font-size: 1.1rem;
