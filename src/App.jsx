@@ -72,7 +72,7 @@ function App() {
     setStatus(newStatus);
     setTimeout(() => {
       setStatus(null);
-    }, 5000);
+    }, 2000);
   }
 
   const userValue = useMemo(() => {

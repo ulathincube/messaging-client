@@ -1,6 +1,6 @@
 .wrapper {
   padding: 10px;
-  background-color: var(--main-color);
+  background-color: var(--main-color-background);
   flex: 1;
   color: var(--text-color);
 }
@@ -20,6 +20,7 @@
 
 .caption {
   font-size: var(--font-size-large);
+  font-weight: var(--font-weight-normal);
 }
 
 .label {
@@ -34,13 +35,17 @@
 
 .field {
   border: none;
-  background-color: var(--main-color-lighter);
+  background-color: var(--main-color-background);
   border: var(--light-border);
   color: var(--text-color);
 }
 
+.field:focus {
+  outline: 2px solid var(--text-color);
+}
+
 .submit {
   border: none;
-  background-color: var(--main-color-strong);
-  color: var(--text-color);
+  background-color: var(--main-color);
+  color: var(--white);
 }
