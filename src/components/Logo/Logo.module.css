@@ -6,7 +6,7 @@
 
 .logo {
   color: var(--text-color);
-  font-weight: var(--font-weight-superbold);
+  font-weight: var(--font-weight-normal);
 }
 
 .small {

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  background: var(--gradient-one);
+  background-color: var(--main-color-background);
 }
 
 .chats {
@@ -15,7 +15,7 @@
 }
 
 .contact {
-  background-color: var(--backdrop-color-dark);
+  background-color: var(--main-color-background-darker);
   color: var(--main-color-foreground);
   padding: 15px;
   display: flex;
@@ -38,7 +38,7 @@
   height: var(--avatar-size);
   border-radius: var(--border-radius-circle);
   color: var(--text-color);
-  background-color: var(--main-color);
+  background-color: var(--main-color-background);
 
   display: flex;
   justify-content: center;
@@ -64,7 +64,7 @@
   padding: 10px;
   position: sticky;
   inset: 0;
-  background: var(--gradient-one);
+  background-color: var(--main-color-background);
   height: fit-content;
   gap: 10px;
   width: 100%;
@@ -87,13 +87,17 @@
 }
 
 .submit {
-  background-color: var(--main-color-strong);
+  background-color: var(--main-color);
   color: var(--text-color);
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
+}
+
+.small {
+  color: var(--white);
 }
 
 .submit svg {
@@ -106,8 +110,9 @@
   line-height: 1.2;
   padding: 10px;
   color: var(--text-color);
-  background-color: var(--gray);
+  background-color: var(--main-color-background);
   box-shadow: var(--shadow-inset);
+  border: 1px solid var(--text-color);
 }
 
 .message:focus {

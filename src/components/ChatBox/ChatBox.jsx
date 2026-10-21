@@ -68,6 +68,8 @@ function ChatBox() {
   async function onSendMessage(event) {
     event.preventDefault();
 
+    if (!message) return;
+
     mutation.mutate({
       message,
       senderEmail: user.email,
@@ -94,6 +96,7 @@ function ChatBox() {
               strokeWidth='2'
               strokeLinecap='round'
               strokeLinejoin='round'
+              className={styles.icon}
             >
               <path d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'></path>
               <circle cx='12' cy='7' r='4'></circle>
@@ -116,6 +119,7 @@ function ChatBox() {
       <form className={styles.chat}>
         <div className={styles.group}>
           <textarea
+            required={true}
             value={message}
             onChange={onMessageChange}
             className={styles.message}
@@ -123,7 +127,7 @@ function ChatBox() {
         </div>
         <div className={styles.group}>
           <button onClick={onSendMessage} className={styles.submit}>
-            <span className={styles.icon}>
+            <span className={styles.box}>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 width='24'
@@ -134,6 +138,7 @@ function ChatBox() {
                 strokeWidth='2'
                 strokeLinecap='round'
                 strokeLinejoin='round'
+                className={styles.small}
               >
                 <line x1='22' y1='2' x2='11' y2='13'></line>
                 <polygon points='22 2 15 22 11 13 2 9 22 2'></polygon>

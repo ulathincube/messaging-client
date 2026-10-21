@@ -1,14 +1,14 @@
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: var(--spacing-10);
   background-color: var(--main-color-background);
   color: var(--main-color-foreground);
   align-items: baseline;
 }
 
 .logo {
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-normal);
   color: var(--main-color-foreground);
 }
 

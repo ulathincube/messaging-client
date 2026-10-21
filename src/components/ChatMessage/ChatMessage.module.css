@@ -4,7 +4,7 @@
   display: flex;
   gap: 2.5px;
   flex-direction: column;
-  background-color: var(--main-color-lighter);
+  background-color: var(--main-color-background-darker);
   color: var(--text-color);
   width: fit-content;
   border-radius: var(--border-radius);

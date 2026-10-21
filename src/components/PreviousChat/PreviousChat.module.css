@@ -44,7 +44,7 @@
 }
 
 .active {
-  background-color: var(--backdrop-color-dark);
+  background-color: var(--main-color-background-darker);
   /* border-bottom: none; */
   color: var(--main-color-foreground);
 }

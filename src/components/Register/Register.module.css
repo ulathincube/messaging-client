@@ -82,7 +82,7 @@
 .field,
 .submit {
   border-radius: 0;
-  background-color: var(--main-color-lighter);
+  background-color: var(--main-color-background);
   border: var(--light-border);
   padding: 16px;
   border-radius: 4px;
@@ -90,9 +90,7 @@
 }
 
 .field:focus {
-  background-color: var(--main-color);
-  color: var(--text-color);
-  outline: 2px solid var(--supporting-color);
+  outline: 2px solid var(--text-color);
 }
 
 .field:focus .field::placeholder {
@@ -101,7 +99,7 @@
 
 .submit {
   background-color: var(--main-color-strong);
-  color: var(--text-color);
+  color: var(--white);
   border: none;
   padding: 16px;
   font-size: var(--font-size-medium);
