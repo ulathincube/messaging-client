@@ -5,7 +5,7 @@ function Logo({ size = 'superlarge' }) {
 
   return (
     <div className={styles.wrapper}>
-      <span className={`${styles.logo} ${sizing}`}>Chat</span>
+      <span className={`${styles.logo} ${sizing}`}>Message-Me</span>
     </div>
   );
 }

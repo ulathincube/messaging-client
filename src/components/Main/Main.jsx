@@ -50,7 +50,7 @@ function Main() {
       <aside className={styles.sidebar}>
         <article className={styles.chats}>
           <h2 className={styles.title}>
-            <span className={styles.text}>Chats</span>
+            <span className={styles.text}>Messages</span>
             <span className={styles.icon}>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -94,6 +94,7 @@ function Main() {
                   type='email'
                   name='search'
                   id='search'
+                  placeholder='Search'
                   className={styles.field}
                 />
               </div>

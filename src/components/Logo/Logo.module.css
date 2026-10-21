@@ -4,17 +4,12 @@
   margin-right: auto;
 }
 
-.logo {
-  color: var(--text-color);
-  font-weight: var(--font-weight-normal);
-}
-
 .small {
   font-size: var(--font-size-medium);
 }
 
 .medium {
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-medium);
 }
 
 .large {
@@ -22,5 +17,16 @@
 }
 
 .superlarge {
-  font-size: var(--font-size-superlarge);
+  font-size: var(--font-size-large);
+}
+
+.logo {
+  color: var(--text-color);
+  font-weight: var(--font-weight-normal);
+}
+
+@media screen and (max-width: 62.5rem) {
+  .logo {
+    font-size: var(--font-size-large-mobile);
+  }
 }
