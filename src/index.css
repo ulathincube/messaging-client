@@ -20,8 +20,8 @@
     var(--main-focus-color-next)
   );
   --main-color-strong: hsl(220deg 95% 45%);
-  --main-color: hsl(220deg 30% 25%);
-  --main-color-next: hsl(250deg 50% 40%);
+  --main-color: hsl(220deg 100% 50%);
+  --main-color-next: hsl(270deg 100% 50%);
   --gradient-two: linear-gradient(var(--main-color), var(--main-color-next));
   --contrast-color: hsl(30deg 100% 50%);
   --main-color-lighter: hsl(220deg 20% 35%);
